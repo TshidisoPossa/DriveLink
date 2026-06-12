@@ -1,0 +1,481 @@
+:root {
+  --blue:       #1a56db;
+  --blue-light: #e8f0fe;
+  --blue-mid:   #3b82f6;
+  --text:       #111827;
+  --muted:      #6b7280;
+  --border:     #e5e7eb;
+  --bg:         #f4f6fb;
+  --white:      #ffffff;
+  --warn:       #dc2626;
+  --warn-bg:    #fef2f2;
+  --green:      #16a34a;
+  --green-bg:   #f0fdf4;
+  --radius:     12px;
+  --radius-sm:  8px;
+  --shadow:     0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.10);
+}
+
+/* ─── RESET ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; }
+
+/* ─── NAVBAR (matches CarListTwo) ─── */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  height: 60px;
+  gap: 0;
+}
+
+.brand {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--blue);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+  margin-right: 40px;
+}
+
+.nav-center {
+  display: flex;
+  gap: 28px;
+  flex: 1;
+}
+.nav-center a {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: color 0.18s;
+}
+.nav-center a:hover { color: var(--text); }
+
+/* ─── LAYOUT (matches CarListTwo) ─── */
+.layout {
+  display: flex;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+/* ─── SIDEBAR (matches CarListTwo exactly) ─── */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 80px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Step row */
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  cursor: default;
+  transition: background 0.15s;
+}
+
+/* Icon bubble */
+.step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+/* Done — solid blue fill with white tick */
+.done-icon {
+  background: var(--blue);
+  border: 2px solid var(--blue);
+  color: var(--white);
+}
+
+/* Active — solid blue fill with ring glow */
+.active-icon {
+  background: var(--blue);
+  border: 2px solid var(--blue);
+  color: var(--white);
+  box-shadow: 0 0 0 4px rgba(26, 86, 219, 0.18);
+}
+
+/* Muted — grey number */
+.muted-icon {
+  background: var(--white);
+  border: 2px solid var(--border);
+  color: var(--muted);
+}
+
+/* Step info text */
+.step-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.step-label {
+  font-size: 0.67rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.active-label { color: var(--blue); }
+
+.step-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.3;
+}
+
+.active-name { color: var(--blue); }
+
+/* Done step name */
+.step-item.done .step-name { color: var(--text); }
+
+/* Connector line between steps */
+.step-connector {
+  width: 2px;
+  height: 14px;
+  margin-left: 27px;
+  background: var(--border);
+  border-radius: 2px;
+}
+.step-connector.done { background: var(--blue); }
+
+/* ─── MAIN CONTENT ─── */
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Page title — blue to match CarListTwo */
+.page-title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  color: var(--blue);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+
+.page-sub {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.65;
+  margin-bottom: 30px;
+  max-width: 580px;
+}
+
+/* ─── DOC SECTION ─── */
+.doc-section { margin-bottom: 28px; }
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ─── DOC CARD ─── */
+.doc-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 20px 18px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.doc-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #d1d5db;
+}
+
+.doc-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.doc-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+}
+
+/* Card title — blue */
+.doc-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1.3;
+}
+
+.doc-note-text {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+/* ─── YES / NO TOGGLE ─── */
+.yn-toggle {
+  display: flex;
+  gap: 10px;
+}
+
+.yn-btn {
+  flex: 1;
+  padding: 10px 0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--muted);
+  transition: all 0.18s;
+}
+.yn-btn:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+  background: var(--blue-light);
+}
+.yn-btn.selected-yes {
+  background: var(--green-bg);
+  border-color: var(--green);
+  color: var(--green);
+}
+.yn-btn.selected-no {
+  background: var(--warn-bg);
+  border-color: var(--warn);
+  color: var(--warn);
+}
+
+/* ─── UPLOAD ZONE ─── */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-sm);
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  text-align: center;
+}
+.upload-zone:hover,
+.upload-zone.drag-over {
+  border-color: var(--blue);
+  background: var(--blue-light);
+}
+.upload-zone.uploaded {
+  border-color: var(--green);
+  background: var(--green-bg);
+}
+
+.upload-icon { width: 40px; height: 40px; }
+
+.upload-cta {
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+.upload-hint {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.upload-filename {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green);
+  margin-top: 4px;
+  word-break: break-all;
+}
+
+/* ─── NOTES ─── */
+.doc-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+.doc-note svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.doc-note.warn { color: var(--warn); }
+
+/* ─── REVIEW BANNER ─── */
+.review-banner {
+  display: flex;
+  gap: 14px;
+  background: var(--blue-light);
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 32px;
+}
+.review-banner strong {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--blue);
+  display: block;
+  margin-bottom: 4px;
+}
+.review-banner p {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+/* ─── FOOTER (matches CarListTwo) ─── */
+.footer-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 8px 0 20px;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Back button — matches CarListTwo */
+.btn-back {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  transition: border-color 0.18s, background 0.18s;
+}
+.btn-back:hover {
+  border-color: var(--blue);
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+/* Continue / Submit button — matches CarListTwo */
+.btn-continue {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 28px;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  transition: background 0.18s, transform 0.12s;
+}
+.btn-continue:hover {
+  background: #1648c0;
+  transform: translateY(-1px);
+}
+.btn-continue:active { transform: translateY(0); }
+
+/* ─── SUCCESS MODAL ─── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 36px 32px;
+  width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+  animation: slideUp 0.25s ease;
+}
+.modal-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+}
+.modal-icon svg { width: 100%; height: 100%; }
+
+.modal-box h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+.modal-box p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(24px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 860px) {
+  .layout  { flex-direction: column; gap: 24px; padding: 24px 16px 60px; }
+  .sidebar { width: 100%; position: static; flex-direction: row; flex-wrap: wrap; gap: 6px; }
+  .step-connector { display: none; }
+  .step-item { flex: 1; min-width: 120px; }
+}
+
+@media (max-width: 600px) {
+  .doc-grid  { grid-template-columns: 1fr; }
+  .navbar    { padding: 0 16px; gap: 16px; }
+  .nav-center { display: none; }
+  .page-title { font-size: 1.5rem; }
+}

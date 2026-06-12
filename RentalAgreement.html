@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DriveLink – Rental Agreement</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="RentalAgreement.css">
+</head>
+<body>
+
+  <!-- ── TOP BAR ── -->
+  <div class="top-bar">
+    <div class="top-bar-left">
+      <a href="bookingTwo.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <div class="top-bar-title">
+        <h1 class="agreement-title">RENTAL AGREEMENT <span id="refNumber">#REF-0000</span></h1>
+        <p class="top-bar-sub">DriveLink Digital Document Portal</p>
+      </div>
+    </div>
+    <div class="top-bar-right">
+      <span class="secure-badge">
+        <i class="fa-solid fa-location-dot"></i> SECURE DOCUMENT
+      </span>
+      <button class="export-btn" onclick="window.print()">
+        <i class="fa-solid fa-file-export"></i> EXPORT
+      </button>
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <div class="page-wrap">
+
+    <!-- Brand header -->
+    <div class="brand-header">
+      <div class="brand-left">
+        <div class="brand-logo">DRIVELINK</div>
+        <div class="brand-meta">
+          <span>Agreement Ref: <strong id="agreementRef">DL-2026-00482</strong></span>
+          <span class="dot">·</span>
+          <span>Status: <span class="status-badge" id="statusBadge">Awaiting Renter Signature</span></span>
+        </div>
+      </div>
+      <div class="effective-date-box">
+        <span class="eff-label">EFFECTIVE DATE</span>
+        <span class="eff-date" id="effectiveDate">—</span>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+    <!-- ── OWNER CARD ONLY ── -->
+    <div class="parties-row">
+      <div class="party-card owner-card">
+        <div class="party-tag">VEHICLE OWNER</div>
+        <div class="verified-tag">
+          <i class="fa-solid fa-circle-check"></i> Verified User
+        </div>
+        <div class="party-body">
+          <div class="party-avatar" id="ownerInitial">T</div>
+          <div class="party-info">
+            <h3 id="ownerName">THANDI M.</h3>
+            <p id="ownerPhone">+27 82 123 4567</p>
+            <p id="ownerCity">Johannesburg, GP</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── VEHICLE + COST ROW ── -->
+    <div class="vehicle-cost-row">
+
+      <!-- Vehicle details -->
+      <div class="vehicle-section">
+        <div class="vehicle-img-box">
+          <span class="premium-tag">PREMIUM VEHICLE</span>
+          <div class="vehicle-img-placeholder grad-1" id="vehicleImgBox">
+            <svg viewBox="0 0 100 40" fill="none">
+              <path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z"
+                fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+              <circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+              <circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+              <path d="M30 8 L35 20 L65 20 L70 8" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="vehicle-details">
+          <p class="vd-label">VEHICLE DETAILS</p>
+          <h2 class="vehicle-name" id="vehicleName">TOYOTA COROLLA 2021</h2>
+          <div class="vehicle-tags">
+            <span class="vtag" id="vehicleReg">REG: CA 123-456</span>
+            <span class="vtag" id="vehicleColor">Silver Metallic</span>
+            <span class="vtag" id="vehicleTrans">Automatic</span>
+          </div>
+
+          <p class="vd-label" style="margin-top:16px;">TERMS &amp; CONDITIONS</p>
+          <div class="terms-row">
+            <span class="term-item no-smoke">
+              <i class="fa-solid fa-ban"></i> Strictly No Smoking
+            </span>
+            <span class="term-item no-pets">
+              <i class="fa-solid fa-paw"></i> No Pets Allowed
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rental total card -->
+      <div class="cost-card">
+        <div class="cost-card-top">
+          <span class="cost-label">RENTAL TOTAL</span>
+          <span class="invoice-tag" id="invoiceNum">INVOICE #0928</span>
+        </div>
+
+        <div class="total-amount">
+          <span id="totalAmount">R 1,775</span>
+          <span class="incl-vat">Incl. VAT</span>
+        </div>
+
+        <div class="cost-lines">
+          <div class="cost-line">
+            <span id="rentalDaysLabel">3 Days Rental (@ R 550)</span>
+            <span id="rentalSubtotal">R 1,650</span>
+          </div>
+          <div class="cost-line">
+            <span>Platform Service Fee</span>
+            <span id="rentalFee">R 125</span>
+          </div>
+          <div class="cost-line">
+            <span>Security Deposit</span>
+            <span id="securityDeposit">R 2,500</span>
+          </div>
+        </div>
+
+        <div class="late-policy">
+          <p class="late-label">LATE RETURN POLICY</p>
+          <p>R 150 per hour penalty applies after 30min grace period.</p>
+        </div>
+
+        <div class="escrow-note">
+          <i class="fa-solid fa-shield-halved"></i>
+          Payment secured by DriveLink Escrow
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TIMELINE + OBLIGATIONS ROW ── -->
+    <div class="timeline-obligations-row">
+
+      <!-- Rental timeline -->
+      <div class="timeline-card">
+        <div class="card-header-row">
+          <span class="card-section-label">RENTAL TIMELINE</span>
+          <i class="fa-regular fa-calendar"></i>
+        </div>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot pickup-dot"></div>
+            <div class="tl-content">
+              <span class="tl-label">PICKUP</span>
+              <p class="tl-date" id="pickupDateTime">May 1, 2026 · 10:00 AM</p>
+              <p class="tl-location" id="pickupLocation">Sandton City Parking Entrance, Level P3</p>
+            </div>
+          </div>
+          <div class="tl-line"></div>
+          <div class="tl-item">
+            <div class="tl-dot return-dot"></div>
+            <div class="tl-content">
+              <span class="tl-label">RETURN</span>
+              <p class="tl-date" id="returnDateTime">May 4, 2026 · 10:00 AM</p>
+              <p class="tl-location">Same as pickup location</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="fuel-policy">
+          <i class="fa-solid fa-gas-pump"></i>
+          <span>Fuel Policy: Full-to-Full. Vehicle must be returned with a full tank.</span>
+        </div>
+      </div>
+
+      <!-- Obligations -->
+      <div class="obligations-card">
+        <div class="card-header-row">
+          <span class="card-section-label">OBLIGATIONS</span>
+          <i class="fa-solid fa-scale-balanced"></i>
+        </div>
+
+        <div class="obligation-group">
+          <p class="obl-party">RENTER</p>
+          <ul class="obl-list">
+            <li><i class="fa-solid fa-circle-check"></i> Responsible for all damages and loss during period.</li>
+            <li><i class="fa-solid fa-circle-check"></i> Liability for traffic fines and e-tolls incurred.</li>
+          </ul>
+        </div>
+
+        <div class="obligation-group">
+          <p class="obl-party">OWNER</p>
+          <ul class="obl-list">
+            <li><i class="fa-solid fa-circle-check"></i> Ensure roadworthiness and cleanliness at handover.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SIGNATURE SECTION ── -->
+    <div class="signature-section">
+
+      <!-- Owner signature — already signed -->
+      <div class="sig-card signed-card">
+        <div class="sig-header">
+          <span class="sig-label">OWNER SIGNATURE <i class="fa-solid fa-lock"></i></span>
+        </div>
+        <div class="sig-display" id="ownerSigDisplay">
+          <span class="sig-name-display" id="ownerSigName">THANDI M.</span>
+        </div>
+        <div class="sig-confirmed">
+          <i class="fa-solid fa-square-check"></i>
+          TERMS ACCEPTED &amp; SIGNED
+        </div>
+        <div class="sig-timestamp" id="ownerTimestamp">
+          Timestamp: — · IP: 197.***.**.12
+        </div>
+      </div>
+
+      <!-- Renter signature — tick to sign -->
+      <div class="sig-card renter-sig-card" id="renterSigCard">
+        <div class="sig-header">
+          <span class="sig-label">RENTER SIGNATURE</span>
+        </div>
+
+        <!-- Before signing -->
+        <div class="sig-pending" id="sigPending">
+          <i class="fa-solid fa-pen-to-square"></i>
+          <p>Click to sign digitally</p>
+        </div>
+
+        <!-- Checkbox agreement -->
+        <div class="sig-checkbox-row">
+          <input type="checkbox" id="agreeCheckbox" onchange="handleCheckbox()"/>
+          <label for="agreeCheckbox">
+            I have read and agree to all terms and conditions of this digital rental
+            agreement, including damage liabilities and insurance coverage requirements.
+          </label>
+        </div>
+
+
+
+
+        <!-- Finalize button -->
+        <button class="btn-finalize" id="finalizeBtn" onclick="finalizeAgreement()" disabled>
+          <i class="fa-solid fa-file-signature"></i>
+          Finalize &amp; Sign Agreement
+        </button>
+      </div>
+
+    </div><!-- /signature-section -->
+
+    <!-- Download PDF -->
+    <div class="download-section">
+      <button class="btn-download" id="downloadBtn" disabled>
+        <i class="fa-solid fa-download"></i>
+        Download Completed PDF
+      </button>
+      <p class="download-note">
+        <i class="fa-solid fa-circle-info"></i>
+        The certified PDF will be generated automatically once both parties have digitally signed.
+      </p>
+    </div>
+
+  </div><!-- /page-wrap -->
+
+  <script src="RentalAgreement.js"></script>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>List Your Car — DriveShare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CarListOne.css" />
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-dot"></div>
+    DriveShare
+  </a>
+  <div class="nav-links">
+    <a href="#">Browse</a>
+    <a href="#">How it works</a>
+    <a href="#">Contact</a>
+    <a href="#">Login</a>
+    <button class="btn-nav">Get Started</button>
+  </div>
+</nav>
+
+<div class="page-layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <p class="sidebar-label">Your progress</p>
+    <div class="steps-list" id="stepsList">
+      <div class="step-item active" data-step="1">
+        <div class="step-bubble" id="bubble-1">1</div>
+        <div class="step-text">
+          <span class="step-name">Vehicle info</span>
+          <span class="step-desc">Make, model & specs</span>
+        </div>
+      </div>
+      <div class="step-item" data-step="2">
+        <div class="step-bubble" id="bubble-2">2</div>
+        <div class="step-text">
+          <span class="step-name">Photos</span>
+          <span class="step-desc">Upload car images</span>
+        </div>
+      </div>
+      <div class="step-item" data-step="3">
+        <div class="step-bubble" id="bubble-3">3</div>
+        <div class="step-text">
+          <span class="step-name">Pricing</span>
+          <span class="step-desc">Daily rate & availability</span>
+        </div>
+      </div>
+      <div class="step-item" data-step="4">
+        <div class="step-bubble" id="bubble-4">4</div>
+        <div class="step-text">
+          <span class="step-name">Location</span>
+          <span class="step-desc">Pickup & handover</span>
+        </div>
+      </div>
+      <div class="step-item" data-step="5">
+        <div class="step-bubble" id="bubble-5">5</div>
+        <div class="step-text">
+          <span class="step-name">Features & rules</span>
+          <span class="step-desc">Extras & policies</span>
+        </div>
+      </div>
+      <div class="step-item" data-step="6">
+        <div class="step-bubble" id="bubble-6">6</div>
+        <div class="step-text">
+          <span class="step-name">Documents</span>
+          <span class="step-desc">Submit for review</span>
+        </div>
+      </div>
+    </div>
+    <div class="sidebar-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2">
+        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+        <polyline points="17 21 17 13 7 13 7 21"/>
+        <polyline points="7 3 7 8 15 8"/>
+      </svg>
+      <p>Your listing saves automatically as a draft. Come back anytime to finish.</p>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main">
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+
+    <!-- STEP 1: Vehicle Info -->
+    <div class="step-panel active" id="panel-1">
+      <span class="step-badge">Step 1 of 6</span>
+      <h1 class="step-heading">Tell us about your car</h1>
+      <p class="step-sub">Provide basic details about your vehicle to help renters identify it and ensure eligibility for our insurance coverage.</p>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          Basic details
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="make">Make (Brand)<span class="req">*</span></label>
+            <select id="make">
+              <option value="">Select Brand</option>
+              <option>Toyota</option><option>BMW</option><option>Mercedes-Benz</option>
+              <option>Volkswagen</option><option>Ford</option><option>Honda</option>
+              <option>Audi</option><option>Hyundai</option><option>Kia</option>
+              <option>Nissan</option><option>Chevrolet</option><option>Mazda</option>
+              <option>Suzuki</option><option>Isuzu</option><option>Other</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="model">Model<span class="req">*</span></label>
+            <input type="text" id="model" placeholder="e.g. Corolla, Polo, X5" />
+          </div>
+          <div class="field">
+            <label for="year">Year<span class="req">*</span></label>
+            <select id="year"></select>
+          </div>
+          <div class="field">
+            <label for="colour">Colour<span class="req">*</span></label>
+            <select id="colour">
+              <option>White</option><option>Black</option><option>Silver</option>
+              <option>Grey</option><option>Blue</option><option>Red</option>
+              <option>Green</option><option>Brown</option><option>Gold</option><option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          Registration & identification
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="plate">Registration / Plate<span class="req">*</span></label>
+            <input type="text" id="plate" placeholder="e.g. CA 123-456" />
+          </div>
+          <div class="field">
+            <label for="vin">VIN Number<span class="req">*</span></label>
+            <input type="text" id="vin" placeholder="17-character VIN" maxlength="17" />
+          </div>
+          <div class="field">
+            <label for="odometer">Odometer Reading (km)<span class="req">*</span></label>
+            <input type="number" id="odometer" placeholder="Current mileage" min="0" />
+          </div>
+          <div class="field">
+            <label for="category">Vehicle Category<span class="req">*</span></label>
+            <select id="category">
+              <option>SUV</option><option>Sedan</option><option>Hatchback</option>
+              <option>Pickup / Bakkie</option><option>Minivan / MPV</option>
+              <option>Coupe</option><option>Convertible</option><option>Luxury</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Specifications
+        </div>
+        <div class="toggle-label">Transmission<span class="req">*</span></div>
+        <div class="radio-group">
+          <input type="radio" name="transmission" id="tr-auto" value="Automatic" />
+          <label for="tr-auto">Automatic</label>
+          <input type="radio" name="transmission" id="tr-manual" value="Manual" />
+          <label for="tr-manual">Manual</label>
+        </div>
+        <div class="toggle-label">Fuel Type<span class="req">*</span></div>
+        <div class="radio-group">
+          <input type="radio" name="fuel_type" id="ft-petrol" value="Petrol" />
+          <label for="ft-petrol">Petrol</label>
+          <input type="radio" name="fuel_type" id="ft-diesel" value="Diesel" />
+          <label for="ft-diesel">Diesel</label>
+          <input type="radio" name="fuel_type" id="ft-electric" value="Electric" />
+          <label for="ft-electric">Electric</label>
+          <input type="radio" name="fuel_type" id="ft-hybrid" value="Hybrid" />
+          <label for="ft-hybrid">Hybrid</label>
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="seats">Number of Seats<span class="req">*</span></label>
+            <select id="seats">
+              <option>2</option><option>4</option><option selected>5</option>
+              <option>6</option><option>7</option><option>8</option><option>9+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="doors">Number of Doors</label>
+            <select id="doors">
+              <option>2</option><option selected>4</option><option>5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-footer">
+        <button class="btn-ghost" disabled>Back</button>
+        <button class="btn-primary" onclick="nextStep(1)">Save & Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Photos -->
+    <div class="step-panel" id="panel-2">
+      <span class="step-badge">Step 2 of 6</span>
+      <h1 class="step-heading">Add photos of your car</h1>
+      <p class="step-sub">Clear, well-lit photos help renters feel confident. Add at least 4 images — exterior, interior, and dashboard.</p>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Vehicle photos
+        </div>
+        <label class="upload-zone" for="photoInput">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <h3>Click to upload photos</h3>
+          <p>JPG, PNG or HEIC & max 10MB each</p>
+          <input type="file" id="photoInput" accept="image/*" multiple style="display:none" onchange="handlePhotos(event)" />
+        </label>
+        <div class="photo-grid" id="photoGrid"></div>
+      </div>
+      <div class="form-footer">
+        <button class="btn-ghost" onclick="prevStep(2)">Back</button>
+        <button class="btn-primary" onclick="nextStep(2)">Save & Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Pricing -->
+    <div class="step-panel" id="panel-3">
+      <span class="step-badge">Step 3 of 6</span>
+      <h1 class="step-heading">Pricing & availability</h1>
+      <p class="step-sub">Set your daily rate and define when your car is available for rental.</p>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Rental rates
+        </div>
+        <div class="grid-3">
+          <div class="field">
+            <label for="daily_rate">Daily Rate (R)<span class="req">*</span></label>
+            <input type="number" id="daily_rate" placeholder="e.g. 450" min="0" />
+          </div>
+          <div class="field">
+            <label for="weekly_rate">Weekly Rate (R)</label>
+            <input type="number" id="weekly_rate" placeholder="Optional discount" min="0" />
+          </div>
+          <div class="field">
+            <label for="deposit">Security Deposit (R)<span class="req">*</span></label>
+            <input type="number" id="deposit" placeholder="e.g. 2000" min="0" />
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Availability
+        </div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="avail_from">Available From<span class="req">*</span></label>
+            <input type="date" id="avail_from" />
+          </div>
+          <div class="field">
+            <label for="avail_until">Available Until</label>
+            <input type="date" id="avail_until" />
+          </div>
+          <div class="field">
+            <label for="min_period">Minimum Rental Period</label>
+            <select id="min_period">
+              <option>1 day</option><option>2 days</option>
+              <option>3 days</option><option>1 week</option><option>2 weeks</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="max_period">Maximum Rental Period</label>
+            <select id="max_period">
+              <option>No limit</option><option>1 week</option>
+              <option>2 weeks</option><option>1 month</option><option>3 months</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button class="btn-ghost" onclick="prevStep(3)">Back</button>
+        <button class="btn-primary" onclick="nextStep(3)">Save & Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Location -->
+    <div class="step-panel" id="panel-4">
+      <span class="step-badge">Step 4 of 6</span>
+      <h1 class="step-heading">Location & handover</h1>
+      <p class="step-sub">Let renters know where they can pick up the car and how you prefer to hand it over.</p>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Pickup location
+        </div>
+        <div class="field">
+          <label for="address">Street Address<span class="req">*</span></label>
+          <input type="text" id="address" placeholder="e.g. 12 Main Street" />
+        </div>
+        <div class="grid-3" style="margin-top:1rem">
+          <div class="field">
+            <label for="city">City<span class="req">*</span></label>
+            <input type="text" id="city" placeholder="e.g. Pretoria" />
+          </div>
+          <div class="field">
+            <label for="province">Province<span class="req">*</span></label>
+            <select id="province">
+              <option value="">Select Province</option>
+              <option>Gauteng</option><option>Western Cape</option><option>KwaZulu-Natal</option>
+              <option>Eastern Cape</option><option>Limpopo</option><option>Mpumalanga</option>
+              <option>North West</option><option>Free State</option><option>Northern Cape</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="postal">Postal Code</label>
+            <input type="text" id="postal" placeholder="0001" maxlength="4" />
+          </div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="card-title">Handover preference</div>
+        <div class="toggle-label">How will you hand over the car?<span class="req">*</span></div>
+        <div class="radio-group">
+          <input type="radio" name="handover" id="h-meet" value="Meet at location" />
+          <label for="h-meet">Meet at location</label>
+          <input type="radio" name="handover" id="h-lockbox" value="Key lockbox" />
+          <label for="h-lockbox">Key lockbox</label>
+          <input type="radio" name="handover" id="h-delivery" value="Delivery available" />
+          <label for="h-delivery">Delivery available</label>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button class="btn-ghost" onclick="prevStep(4)">Back</button>
+        <button class="btn-primary" onclick="nextStep(4)">Save & Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 5: Features & Rules -->
+    <div class="step-panel" id="panel-5">
+      <span class="step-badge">Step 5 of 6</span>
+      <h1 class="step-heading">Features & rental rules</h1>
+      <p class="step-sub">Highlight what makes your car great and set the ground rules for renters.</p>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          Vehicle features
+        </div>
+        <div class="features-grid" id="featuresContainer"></div>
+      </div>
+      <div class="form-card">
+        <div class="card-title">Rental rules</div>
+        <div class="grid-2">
+          <div class="field">
+            <label for="min_age">Minimum Driver Age<span class="req">*</span></label>
+            <select id="min_age">
+              <option>18 years</option><option>21 years</option>
+              <option>23 years</option><option>25 years</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="max_km">Max KM per Day</label>
+            <input type="number" id="max_km" placeholder="Leave blank for unlimited" min="0" />
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="toggle-label">Smoking allowed?</div>
+        <div class="radio-group">
+          <input type="radio" name="smoking" id="sm-no" value="No" />
+          <label for="sm-no">No smoking</label>
+          <input type="radio" name="smoking" id="sm-yes" value="Yes" />
+          <label for="sm-yes">Smoking allowed</label>
+        </div>
+        <div class="toggle-label">Pets allowed?</div>
+        <div class="radio-group">
+          <input type="radio" name="pets" id="pt-no" value="No" />
+          <label for="pt-no">No pets</label>
+          <input type="radio" name="pets" id="pt-yes" value="Yes" />
+          <label for="pt-yes">Pets allowed</label>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label for="extra_rules">Additional rules or notes</label>
+          <textarea id="extra_rules" rows="3" placeholder="e.g. No off-road driving. Full tank required on return."></textarea>
+        </div>
+      </div>
+      <div class="form-footer">
+        <button class="btn-ghost" onclick="prevStep(5)">Back</button>
+        <button class="btn-primary" onclick="nextStep(5)">Save & Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 6: Documents -->
+    <div class="step-panel" id="panel-6">
+      <span class="step-badge">Step 6 of 6</span>
+      <h1 class="step-heading">Documents & submit</h1>
+      <p class="step-sub">Upload the required documents for verification. All files are encrypted and stored securely.</p>
+      <div class="form-card">
+        <div class="card-title">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Required documents
+        </div>
+        <div class="grid-1">
+          <div class="field">
+            <label for="doc_ownership">Proof of Ownership (RC1 / Title Deed)<span class="req">*</span></label>
+            <input type="file" id="doc_ownership" accept=".pdf,.jpg,.png" />
+          </div>
+          <div class="field">
+            <label for="doc_roadworthy">Valid Roadworthy Certificate<span class="req">*</span></label>
+            <input type="file" id="doc_roadworthy" accept=".pdf,.jpg,.png" />
+          </div>
+          <div class="field">
+            <label for="doc_insurance">Comprehensive Insurance Certificate<span class="req">*</span></label>
+            <input type="file" id="doc_insurance" accept=".pdf,.jpg,.png" />
+          </div>
+          <div class="field">
+            <label for="doc_licence">Driver's Licence (front & back)<span class="req">*</span></label>
+            <input type="file" id="doc_licence" accept=".pdf,.jpg,.png" multiple />
+          </div>
+        </div>
+      </div>
+	  
+	  <div class="form-card">
+  <div class="card-title">Declaration</div>
+  <p class="declaration-text">
+    By submitting this listing, you confirm that:
+  </p>
+  <ul class="declaration-list">
+    <li>All information provided is accurate and up to date.</li>
+    <li>You are the registered owner or authorised representative of this vehicle.</li>
+    <li>The vehicle meets all legal roadworthy and insurance requirements.</li>
+    <li>You agree to DriveShare's Terms of Service and Host Policy.</li>
+  </ul>
+
+  <!-- Checkbox + label (fully clickable) -->
+  <div class="declaration-confirm">
+    <input type="checkbox" id="agree" class="agree-checkbox" />
+    <label for="agree" class="feature-item">
+      <span class="check-icon">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+             stroke="#fff" stroke-width="3">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </span>
+      I confirm all the above statements are true
+    </label>
+  </div>
+
+  <div class="form-footer">
+    <button class="btn-ghost" onclick="prevStep(6)">Back</button>
+    <button class="btn-primary" onclick="submitListing()">
+      Submit Listing
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</div>
+      
+	  
+	  
+      <div class="form-footer">
+        <button class="btn-ghost" onclick="prevStep(6)">Back</button>
+		
+		
+		
+		
+        <button class="btn-primary" onclick="submitListing()">Submit Listing
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+		
+		
+	
+      </div>
+    </div>
+
+    <!-- SUCCESS PANEL -->
+    <div class="step-panel" id="panel-success">
+      <div class="success-screen">
+        <div class="success-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h2>Listing submitted successfully!</h2>
+        <p>Your car has been submitted for review. Our team will verify your documents within 24–48 hours and notify you by email once your listing goes live.</p>
+        <div class="success-actions">
+          <button class="btn-ghost" onclick="location.reload()">List another car</button>
+		  
+		  <button class="btn-primary" onclick="window.location.href='RenterDashboard.html'">
+            View my listings
+           </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+  // Populate year dropdown
+  const yearSelect = document.getElementById('year');
+  const currentYear = new Date().getFullYear();
+  for (let y = currentYear; y >= 1980; y--) {
+    const option = document.createElement('option');
+    option.value = y;
+    option.textContent = y;
+    if (y === 2020) option.selected = true;
+    yearSelect.appendChild(option);
+  }
+
+  // Features array and grid
+  const featuresList = ['Air Conditioning', 'Bluetooth', 'USB Charging', 'GPS Navigation', 'Sunroof', 'Backup Camera', 'Cruise Control', 'Heated Seats', 'Roof Rack', 'Spare Tyre', 'Towbar', 'Child Seat'];
+  const featuresContainer = document.getElementById('featuresContainer');
+  featuresList.forEach(feature => {
+    const label = document.createElement('label');
+    label.className = 'feature-item';
+    label.innerHTML = `<input type="checkbox" name="features" value="${feature}" style="display:none;"><span class="check-icon"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></span>${feature}`;
+    label.onclick = function(e) {
+      e.preventDefault();
+      this.classList.toggle('checked');
+      const cb = this.querySelector('input');
+      cb.checked = !cb.checked;
+    };
+    featuresContainer.appendChild(label);
+  });
+
+  let currentStep = 1;
+  const totalSteps = 6;
+
+  function updateProgress() {
+    const fill = document.getElementById('progressFill');
+    fill.style.width = `${(currentStep / totalSteps) * 100}%`;
+    
+    for (let i = 1; i <= totalSteps; i++) {
+      const panel = document.getElementById(`panel-${i}`);
+      const stepItem = document.querySelector(`.step-item[data-step="${i}"]`);
+      if (panel) {
+        if (i === currentStep) panel.classList.add('active');
+        else panel.classList.remove('active');
+      }
+      if (stepItem) {
+        if (i === currentStep) stepItem.classList.add('active');
+        else stepItem.classList.remove('active');
+      }
+    }
+    
+    const successPanel = document.getElementById('panel-success');
+    if (successPanel) successPanel.classList.remove('active');
+  }
+
+  function nextStep(step) {
+    if (step === 1) {
+      const make = document.getElementById('make').value;
+      const model = document.getElementById('model').value;
+      const plate = document.getElementById('plate').value;
+      if (!make || !model || !plate) {
+        alert('Please fill in Make, Model, and Registration plate.');
+        return;
+      }
+    }
+    if (step === 2) {
+      const photos = document.querySelectorAll('#photoGrid .photo-thumb').length;
+      if (photos === 0) {
+        alert('Please upload at least one photo of your car.');
+        return;
+      }
+    }
+    if (currentStep < totalSteps) {
+      currentStep++;
+      updateProgress();
+    }
+  }
+
+  function prevStep(step) {
+    if (currentStep > 1) {
+      currentStep--;
+      updateProgress();
+    }
+  }
+
+  // Photo handling
+  let uploadedPhotos = [];
+  
+  window.handlePhotos = function(event) {
+    const files = Array.from(event.target.files);
+    const grid = document.getElementById('photoGrid');
+    
+    files.forEach(file => {
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const div = document.createElement('div');
+          div.className = 'photo-thumb';
+          div.innerHTML = `
+            <img src="${e.target.result}" alt="Car photo">
+            <button class="photo-remove" onclick="this.parentElement.remove()">×</button>
+          `;
+          grid.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+    event.target.value = '';
+  };
+
+  function submitListing() {
+    const agree = document.getElementById('agree');
+    if (!agree.checked) {
+      alert('Please confirm the declaration to submit your listing.');
+      return;
+    }
+    
+    // Hide all step panels and show success
+    for (let i = 1; i <= totalSteps; i++) {
+      document.getElementById(`panel-${i}`).classList.remove('active');
+    }
+    document.getElementById('panel-success').classList.add('active');
+    
+    // Update progress to 100%
+    document.getElementById('progressFill').style.width = '100%';
+  }
+
+  // Add data-step attributes to step items
+  document.querySelectorAll('.step-item').forEach((item, index) => {
+    item.setAttribute('data-step', index + 1);
+    item.onclick = () => {
+      currentStep = index + 1;
+      updateProgress();
+    };
+  });
+</script>
+</body>
+</html>

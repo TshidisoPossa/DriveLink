@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveLink – User Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="UserMan.css" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       SIDEBAR
+  ══════════════════════════════ -->
+  <aside class="sidebar">
+
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div>
+        <div class="brand-name">DRIVELINK</div>
+        <div class="brand-sub">Admin Control</div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item" data-page="dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard Overview</span>
+      </a>
+
+      <a href="#" class="nav-item active" data-page="users">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>User Management</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="listings">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 17H5v-5l2.5-6h9L19 12v5z"/>
+          <circle cx="7.5" cy="17" r="1.5"/>
+          <circle cx="16.5" cy="17" r="1.5"/>
+        </svg>
+        <span>Listings Management</span>
+      </a>
+
+      <a href="#" class="nav-item" data-page="bookings">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>Bookings Log</span>
+      </a>
+    </nav>
+
+    <!-- Divider -->
+    <div class="sidebar-divider"></div>
+
+    <!-- Admin footer -->
+    <div class="sidebar-footer">
+      <div class="admin-avatar-wrap">
+        <div class="admin-avatar">A</div>
+        <div class="online-dot"></div>
+      </div>
+      <div>
+        <div class="admin-name">Admin Session</div>
+        <div class="admin-role">SYSTEM ACCESS</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════
+       MAIN WRAPPER
+  ══════════════════════════════ -->
+  <div class="main-wrapper">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="search-wrap">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        <input type="text" class="search-input" id="globalSearch" placeholder="Global search..." />
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" id="notifBtn" onclick="toggleNotif()" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-dot"></span>
+        </button>
+        <button class="icon-btn" title="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+        <div class="topbar-logo">DRIVELINK</div>
+      </div>
+    </header>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="content">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">USER MANAGEMENT</h1>
+          <p class="page-sub">Oversee system access, verify identities, and manage user statuses.</p>
+        </div>
+      </div>
+
+      <!-- Stat cards -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">TOTAL USERS</div>
+          <div class="stat-row">
+            <span class="stat-value blue" id="statTotal">12,482</span>
+            <span class="stat-badge green-badge">+2%</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">PENDING ID</div>
+          <div class="stat-row">
+            <span class="stat-value red" id="statPending">42</span>
+            <span class="stat-note">Requires Review</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">ACTIVE DRIVERS</div>
+          <div class="stat-row">
+            <span class="stat-value blue" id="statActive">8,910</span>
+            <span class="stat-note">Vetted</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">BANNED</div>
+          <div class="stat-row">
+            <span class="stat-value muted" id="statBanned">156</span>
+            <span class="stat-note">Violation History</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table card -->
+      <div class="table-card">
+
+        <!-- Toolbar: search only -->
+        <div class="table-toolbar">
+          <div class="table-search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+            <input type="text" id="tableSearch" placeholder="Search by name, email or ID..." oninput="filterTable()" />
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+          <table class="user-table">
+            <thead>
+              <tr>
+                <th>USER</th>
+                <th>CONTACT INFORMATION</th>
+                <th>VERIFICATION</th>
+                <th>STATUS</th>
+                <th>ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody id="userTableBody">
+              <!-- Rows injected by script.js -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="table-footer">
+          <span class="showing-text" id="showingText">Showing 1 - 10 of 12,482 users</span>
+          <div class="pagination" id="pagination">
+            <button class="page-btn prev-btn" id="prevBtn" onclick="changePage(-1)" disabled>‹</button>
+            <button class="page-btn active" id="page1">1</button>
+            <button class="page-btn" id="page2" onclick="goToPage(2)">2</button>
+            <button class="page-btn" id="page3" onclick="goToPage(3)">3</button>
+            <span class="page-ellipsis">...</span>
+            <button class="page-btn" onclick="goToPage(1248)">1248</button>
+            <button class="page-btn next-btn" id="nextBtn" onclick="changePage(1)">›</button>
+          </div>
+        </div>
+
+      </div><!-- /table-card -->
+    </main>
+  </div>
+
+  <!-- ══════════════════════════════
+       CREATE USER MODAL
+  ══════════════════════════════ -->
+  <div class="modal-overlay" id="createModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>Create New User</h2>
+        <button class="modal-close" onclick="closeCreateModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" id="newName" placeholder="e.g. John Doe" />
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" id="newEmail" placeholder="e.g. john@example.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" id="newPhone" placeholder="e.g. +27 82 000 0000" />
+        </div>
+        <div class="form-group">
+          <label>Role</label>
+          <select id="newRole">
+            <option value="Renter">Renter</option>
+            <option value="Owner">Owner</option>
+            <option value="Admin">Admin</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeCreateModal()">Cancel</button>
+        <button class="btn-primary" onclick="createUser()">Create User</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW USER MODAL -->
+  <div class="modal-overlay" id="viewModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2>User Details</h2>
+        <button class="modal-close" onclick="closeViewModal()">✕</button>
+      </div>
+      <div class="modal-body" id="viewModalBody">
+        <!-- Injected by JS -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeViewModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="UserMan.js"></script>
+</body>
+</html>

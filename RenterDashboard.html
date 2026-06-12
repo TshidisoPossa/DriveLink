@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DriveLink – Browse Cars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="RenterDashboard.css">
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18">
+          <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        </svg>
+      </div>
+      <span class="logo-name">DRIVE<span>LINK</span></span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#" class="active">Browse Cars</a></li>
+      <li><a href="#">How It Works</a></li>
+    </ul>
+
+    <div class="nav-profile">
+      <button class="profile-btn" onclick="toggleDropdown()">
+        <div class="avatar">T</div>
+        <span class="greeting">Hi, Tshidiso</span>
+        <svg class="chevron" id="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+
+      <div class="dropdown" id="dropdown">
+        <div class="dropdown-header">
+          <div class="dropdown-avatar">T</div>
+          <div>
+            <div class="dropdown-name">Tshidiso P.</div>
+            <div class="dropdown-email">tshidiso@email.com</div>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Browse Cars
+        </a>
+        <a href="#" class="dropdown-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          My Bookings
+        </a>
+        <a href="#" class="dropdown-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Log Out
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ LAYOUT ══ -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar">T</div>
+        <div>
+          <div class="sidebar-name">Tshidiso M.</div>
+          <div class="sidebar-badge"><span class="badge-dot"></span>Verified</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Browse Cars
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          My Bookings
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17H5v-5l2.5-6h9L19 12v5z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
+          My Listings
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Messages
+          <span class="notif-badge">3</span>
+        </a>
+        <a href="#" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          Reviews
+        </a>
+        <div class="sidebar-divider"></div>
+        <a href="#" class="sidebar-link logout-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Log Out
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- Welcome banner -->
+      <div class="welcome-banner">
+        <div>
+          <p class="welcome-label">Welcome back 👋</p>
+          <h1 class="welcome-title">Good morning, <span>Tshidiso</span></h1>
+          <p class="welcome-sub">Browse verified cars near you and book in minutes.</p>
+        </div>
+        <a href="CarlistOne.html" class="btn-list-car">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          List a Car
+        </a>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <div class="filter-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Search by city, area or car model…" oninput="filterCars()"/>
+        </div>
+        <select class="filter-select" id="typeFilter" onchange="filterCars()">
+          <option value="">All Types</option>
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Bakkie">Bakkie</option>
+          <option value="Minivan">Minivan</option>
+        </select>
+        <select class="filter-select" id="priceFilter" onchange="filterCars()">
+          <option value="">Any Price</option>
+          <option value="low">Under R 600/day</option>
+          <option value="mid">R 600 – R 1 000/day</option>
+          <option value="high">Over R 1 000/day</option>
+        </select>
+        <select class="filter-select" id="locationFilter" onchange="filterCars()">
+          <option value="">All Locations</option>
+          <option value="Johannesburg">Johannesburg</option>
+          <option value="Cape Town">Cape Town</option>
+          <option value="Pretoria">Pretoria</option>
+          <option value="Durban">Durban</option>
+          <option value="Sandton">Sandton</option>
+        </select>
+      </div>
+
+      <div class="results-row">
+        <span class="results-count" id="resultsCount">12 cars available</span>
+      </div>
+
+      <!-- ══ CAR GRID ══ -->
+      <div class="car-grid" id="carGrid">
+
+        <!-- Car 1 -->
+        <div class="car-card" data-type="Sedan" data-price="550" data-location="Johannesburg">
+          <div class="car-img">
+            <div class="car-img-bg grad-1">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><path d="M30 8 L35 20 L65 20 L70 8" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.2)" stroke-width="0.8"/></svg>
+            </div>
+            <span class="tag-type">Sedan</span>
+            <span class="tag-price">R 550/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Toyota Corolla 2021</h3>
+              <div class="car-rating">⭐ 4.8 <span>(24)</span></div>
+            </div>
+            <div class="car-location">📍 Johannesburg · Auto · 2021</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>Air Con</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(1)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 2 -->
+        <div class="car-card" data-type="SUV" data-price="950" data-location="Cape Town">
+          <div class="car-img">
+            <div class="car-img-bg grad-2">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 28 L16 10 Q18 6 28 6 L72 6 Q82 6 84 10 L92 28 L92 33 Q92 35 90 35 L10 35 Q8 35 8 33 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="23" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">SUV</span>
+            <span class="tag-price">R 950/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Kia Sorento 2023</h3>
+              <div class="car-rating">⭐ 4.9 <span>(41)</span></div>
+            </div>
+            <div class="car-location">📍 Cape Town · Auto · 2023</div>
+            <div class="car-features">
+              <span>7 Seats</span><span>Petrol</span><span>Air Con</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(2)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 3 -->
+        <div class="car-card" data-type="Hatchback" data-price="420" data-location="Pretoria">
+          <div class="car-img">
+            <div class="car-img-bg grad-3">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M12 28 L22 14 Q24 10 34 10 L66 10 Q76 10 78 14 L88 28 L88 32 Q88 34 86 34 L14 34 Q12 34 12 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="27" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="73" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Hatchback</span>
+            <span class="tag-price">R 420/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">VW Polo 2020</h3>
+              <div class="car-rating">⭐ 4.7 <span>(18)</span></div>
+            </div>
+            <div class="car-location">📍 Pretoria · Manual · 2020</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>Bluetooth</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(3)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 4 -->
+        <div class="car-card" data-type="Bakkie" data-price="780" data-location="Durban">
+          <div class="car-img">
+            <div class="car-img-bg grad-4">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 26 L14 12 Q16 8 26 8 L55 8 L55 26 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M55 14 L55 26 L92 26 L92 30 Q92 34 90 34 L10 34 Q8 34 8 30 L8 26 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><circle cx="23" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Bakkie</span>
+            <span class="tag-price">R 780/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Ford Ranger 2022</h3>
+              <div class="car-rating">⭐ 4.6 <span>(33)</span></div>
+            </div>
+            <div class="car-location">📍 Durban · Auto · 2022</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Diesel</span><span>4x4</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(4)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 5 -->
+        <div class="car-card" data-type="Sedan" data-price="680" data-location="Sandton">
+          <div class="car-img">
+            <div class="car-img-bg grad-5">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Sedan</span>
+            <span class="tag-price">R 680/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">BMW 320i 2021</h3>
+              <div class="car-rating">⭐ 5.0 <span>(12)</span></div>
+            </div>
+            <div class="car-location">📍 Sandton · Auto · 2021</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>Sunroof</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(5)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 6 -->
+        <div class="car-card" data-type="Hatchback" data-price="390" data-location="Johannesburg">
+          <div class="car-img">
+            <div class="car-img-bg grad-6">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M12 28 L22 14 Q24 10 34 10 L66 10 Q76 10 78 14 L88 28 L88 32 Q88 34 86 34 L14 34 Q12 34 12 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="27" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="73" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Hatchback</span>
+            <span class="tag-price">R 390/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Hyundai i20 2019</h3>
+              <div class="car-rating">⭐ 4.5 <span>(29)</span></div>
+            </div>
+            <div class="car-location">📍 Johannesburg · Manual · 2019</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>USB Port</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(6)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 7 -->
+        <div class="car-card" data-type="SUV" data-price="1100" data-location="Cape Town">
+          <div class="car-img">
+            <div class="car-img-bg grad-7">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 28 L16 10 Q18 6 28 6 L72 6 Q82 6 84 10 L92 28 L92 33 Q92 35 90 35 L10 35 Q8 35 8 33 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="23" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">SUV</span>
+            <span class="tag-price">R 1,100/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Toyota Fortuner 2022</h3>
+              <div class="car-rating">⭐ 4.8 <span>(55)</span></div>
+            </div>
+            <div class="car-location">📍 Cape Town · Auto · 2022</div>
+            <div class="car-features">
+              <span>7 Seats</span><span>Diesel</span><span>4x4</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(7)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 8 -->
+        <div class="car-card" data-type="Minivan" data-price="720" data-location="Pretoria">
+          <div class="car-img">
+            <div class="car-img-bg grad-8">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M6 28 L12 10 Q14 6 24 6 L76 6 Q84 6 86 10 L94 28 L94 34 L6 34 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="22" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="78" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Minivan</span>
+            <span class="tag-price">R 720/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Toyota HiAce 2020</h3>
+              <div class="car-rating">⭐ 4.4 <span>(37)</span></div>
+            </div>
+            <div class="car-location">📍 Pretoria · Manual · 2020</div>
+            <div class="car-features">
+              <span>14 Seats</span><span>Diesel</span><span>Large Boot</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(8)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 9 -->
+        <div class="car-card" data-type="Sedan" data-price="490" data-location="Durban">
+          <div class="car-img">
+            <div class="car-img-bg grad-1">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Sedan</span>
+            <span class="tag-price">R 490/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Nissan Almera 2020</h3>
+              <div class="car-rating">⭐ 4.6 <span>(21)</span></div>
+            </div>
+            <div class="car-location">📍 Durban · Auto · 2020</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>Air Con</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(9)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 10 -->
+        <div class="car-card" data-type="Bakkie" data-price="850" data-location="Sandton">
+          <div class="car-img">
+            <div class="car-img-bg grad-4">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 26 L14 12 Q16 8 26 8 L55 8 L55 26 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M55 14 L55 26 L92 26 L92 30 Q92 34 90 34 L10 34 Q8 34 8 30 L8 26 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><circle cx="23" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Bakkie</span>
+            <span class="tag-price">R 850/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Isuzu D-Max 2023</h3>
+              <div class="car-rating">⭐ 4.7 <span>(16)</span></div>
+            </div>
+            <div class="car-location">📍 Sandton · Auto · 2023</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Diesel</span><span>Canopy</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(10)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 11 -->
+        <div class="car-card" data-type="SUV" data-price="880" data-location="Johannesburg">
+          <div class="car-img">
+            <div class="car-img-bg grad-3">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 28 L16 10 Q18 6 28 6 L72 6 Q82 6 84 10 L92 28 L92 33 Q92 35 90 35 L10 35 Q8 35 8 33 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="23" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">SUV</span>
+            <span class="tag-price">R 880/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Haval H6 2022</h3>
+              <div class="car-rating">⭐ 4.5 <span>(9)</span></div>
+            </div>
+            <div class="car-location">📍 Johannesburg · Auto · 2022</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>360 Cam</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(11)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 12 -->
+        <div class="car-card" data-type="Hatchback" data-price="450" data-location="Cape Town">
+          <div class="car-img">
+            <div class="car-img-bg grad-6">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M12 28 L22 14 Q24 10 34 10 L66 10 Q76 10 78 14 L88 28 L88 32 Q88 34 86 34 L14 34 Q12 34 12 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="27" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="73" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Hatchback</span>
+            <span class="tag-price">R 450/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Renault Clio 2021</h3>
+              <div class="car-rating">⭐ 4.8 <span>(14)</span></div>
+            </div>
+            <div class="car-location">📍 Cape Town · Manual · 2021</div>
+            <div class="car-features">
+              <span>5 Seats</span><span>Petrol</span><span>Apple CarPlay</span>
+            </div>
+            <button class="btn-book" onclick="bookCar(12)">Book Now →</button>
+          </div>
+        </div>
+
+      </div><!-- /car-grid -->
+
+      <!-- No results -->
+      <div class="no-results" id="noResults" style="display:none;">
+        <p>No cars found. <button onclick="resetFilters()">Clear Filters</button></p>
+      </div>
+
+    </main>
+  </div>
+
+  
+  
+  
+  <!-- carData.js FIRST so bookCar() can find the database -->
+  <script src="carData.js"></script>
+  <script src="RenterDashboard.js"></script>
+
+  <script>
+    window.LISTED_CARS = [];
+
+    fetch('get_vehicles.php')
+      .then(response => response.json())
+      .then(vehicles => {
+        const carGrid = document.getElementById('carGrid');
+
+        window.LISTED_CARS = vehicles;
+
+        vehicles.forEach((vehicle, index) => {
+          carGrid.innerHTML += `
+            <div class="car-card" 
+              data-type="${vehicle.vehicle_category}" 
+              data-price="${vehicle.daily_rate}" 
+              data-location="Pretoria">
+
+              <div class="car-img">
+                <div class="car-img-bg grad-1">
+                  <svg viewBox="0 0 100 40" fill="none">
+                    <path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                    <circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/>
+                    <circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/>
+                  </svg>
+                </div>
+                <span class="tag-type">${vehicle.vehicle_category}</span>
+                <span class="tag-price">R ${vehicle.daily_rate}/day</span>
+              </div>
+
+              <div class="car-body">
+                <div class="car-top-row">
+                  <h3 class="car-name">${vehicle.make} ${vehicle.model} ${vehicle.year}</h3>
+                  <div class="car-rating">⭐ New</div>
+                </div>
+
+                <div class="car-location">
+                  📍 Pretoria · ${vehicle.transmission} · ${vehicle.year}
+                </div>
+
+                <div class="car-features">
+                  <span>${vehicle.fuel_type}</span>
+                  <span>${vehicle.kilometers} km</span>
+                  <span>${vehicle.vehicle_category}</span>
+                </div>
+
+                <button type="button" class="btn-book" onclick="bookListedCar(${index})">
+                  Book Now →
+                </button>
+              </div>
+            </div>
+          `;
+        });
+
+        filterCars();
+      })
+      .catch(error => {
+        console.log('Could not load database cars:', error);
+      });
+  </script>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+</body>
+</html>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</body>
+
+</html>

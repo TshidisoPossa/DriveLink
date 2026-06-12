@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DriveLink – Car Booking</title>
+  <link rel="stylesheet" href="bookinginfo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    /* ── Extra styles for dynamic car badge strip ── */
+    .car-badge-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .car-badge {
+      background: #e8f0fe;
+      color: #1a56db;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 99px;
+      border: 1px solid #bfdbfe;
+    }
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.4s ease;
+    }
+    .loading-overlay.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader-spinner {
+      width: 42px;
+      height: 42px;
+      border: 4px solid #e8f0fe;
+      border-top-color: #1a56db;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Hero placeholder gradient (used when no real photo) */
+    .hero-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+    }
+    .grad-1 { background: linear-gradient(135deg,#1a56db,#3b82f6); }
+    .grad-2 { background: linear-gradient(135deg,#1e40af,#6366f1); }
+    .grad-3 { background: linear-gradient(135deg,#0e7490,#3b82f6); }
+    .grad-4 { background: linear-gradient(135deg,#1d4ed8,#7c3aed); }
+    .grad-5 { background: linear-gradient(135deg,#1e3a8a,#2563eb); }
+    .grad-6 { background: linear-gradient(135deg,#0369a1,#38bdf8); }
+    .grad-7 { background: linear-gradient(135deg,#4338ca,#818cf8); }
+    .grad-8 { background: linear-gradient(135deg,#1d4ed8,#0891b2); }
+
+    .hero-placeholder svg { width: 55%; height: 55%; opacity: 0.85; }
+
+    /* Price update animation */
+    @keyframes popIn {
+      0%   { transform: scale(0.85); opacity: 0; }
+      100% { transform: scale(1);    opacity: 1; }
+    }
+    .pop { animation: popIn 0.3s ease both; }
+
+    /* Cost summary box */
+    .cost-summary {
+      background: #f4f6fb;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 0.85rem;
+    }
+    .cost-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 4px 0;
+      color: #6b7280;
+    }
+    .cost-row.total {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 6px;
+      padding-top: 10px;
+      font-weight: 700;
+      color: #111827;
+      font-size: 0.95rem;
+    }
+    .cost-row.total span:last-child { color: #1a56db; }
+  </style>
+</head>
+<body>
+
+  <!-- Loading overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">DRIVELINK<span>.</span></div>
+    <nav>
+      <a href="RenterDashboard.html">← Back to Browse</a>
+      <a href="#">List Your Car</a>
+      <a href="#">How It Works</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#" class="signin">Sign in</a>
+      <button class="get-started">Get Started</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+
+    <!-- CAR IMAGE / HERO -->
+    <section class="hero-section">
+      <!-- Dynamic: replaced by JS with gradient placeholder -->
+      <div id="carHeroImage" style="width:100%;height:100%;border-radius:12px;overflow:hidden;">
+        <div class="hero-placeholder grad-1">
+          <svg viewBox="0 0 100 40" fill="none">
+            <path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.4)" stroke-width="1"/>
+            <circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+            <circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="1"/>
+          </svg>
+        </div>
+      </div>
+      <button class="photo-btn">
+        <i class="fa-solid fa-image"></i> View all photos
+      </button>
+    </section>
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid">
+
+      <!-- ── LEFT SIDE ── -->
+      <div class="left-side">
+
+        <!-- CAR INFO (populated by JS) -->
+        <div class="car-info">
+          <h2 id="carName">Loading…</h2>
+          <div class="details-row">
+            <span>
+              <i class="fa-solid fa-location-dot"></i>
+              <span id="carCity">—</span>
+            </span>
+            <span>
+              <i class="fa-solid fa-gear"></i>
+              <span id="carTransmission">—</span>
+            </span>
+            <span>
+              <i class="fa-solid fa-tag"></i>
+              <span id="carType">—</span>
+            </span>
+          </div>
+          <!-- Feature badges -->
+          <div class="car-badge-strip" id="carFeatures"></div>
+        </div>
+
+        <!-- HOST CARD (populated by JS) -->
+        <div class="host-card">
+          <div class="host-top">
+            <div class="host-profile">
+              <div class="avatar" id="hostInitial">?</div>
+              <div class="host-text">
+                <h3>
+                  <span id="hostName">—</span>
+                  <i class="fa-solid fa-circle-check"></i>
+                </h3>
+                <p id="hostSince">—</p>
+              </div>
+            </div>
+            <button class="message-btn">Message</button>
+          </div>
+          <div class="host-stats">
+            <div class="stat">
+              <h4 id="hostResponse">—</h4>
+              <p>RESPONSE</p>
+            </div>
+            <div class="stat">
+              <h4 id="hostTime">—</h4>
+              <p>TIME</p>
+            </div>
+            <div class="stat">
+              <h4 id="hostRating">—</h4>
+              <p>RATING</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- AVAILABILITY CALENDAR -->
+        <div class="availability">
+          <h3>AVAILABILITY</h3>
+          <div class="calendar-card">
+            <div class="calendar-header">
+              <span id="calMonthLabel">JUNE 2026</span>
+              <div class="calendar-arrows">
+                <i class="fa-solid fa-chevron-left"  id="calPrev" style="cursor:pointer"></i>
+                <i class="fa-solid fa-chevron-right" id="calNext" style="cursor:pointer"></i>
+              </div>
+            </div>
+            <div class="calendar-days">
+              <div>S</div><div>M</div><div>T</div><div>W</div>
+              <div>T</div><div>F</div><div>S</div>
+            </div>
+            <div class="calendar-dates" id="calDates"></div>
+          </div>
+        </div>
+
+      </div><!-- /left-side -->
+
+      <!-- ── RIGHT SIDE ── -->
+      <div class="right-side">
+
+        <div class="booking-card">
+
+          <div class="price-row">
+            <div class="price">
+              <span id="carPrice">R —</span> <span>/ day</span>
+            </div>
+            <div class="rating">
+              <i class="fa-solid fa-star"></i>
+              <span id="carRating">—</span>
+              <span id="carReviews" style="font-size:0.8rem;color:#6b7280;margin-left:4px;"></span>
+            </div>
+          </div>
+
+          <!-- DATE BOXES -->
+          <div class="date-selection">
+            <div class="date-box">
+              <label>PICK UP</label>
+              <input type="date" id="pickup" onchange="updateCost()">
+            </div>
+            <div class="date-box">
+              <label>RETURN</label>
+              <input type="date" id="return" onchange="updateCost()">
+            </div>
+          </div>
+
+          <!-- Dynamic cost summary -->
+          <div class="cost-summary" id="costSummary" style="display:none;">
+            <div class="cost-row">
+              <span id="costDaysLabel">0 days × R 0</span>
+              <span id="costSubtotal">R 0</span>
+            </div>
+            <div class="cost-row">
+              <span>Service fee (10%)</span>
+              <span id="costFee">R 0</span>
+            </div>
+            <div class="cost-row total">
+              <span>Total</span>
+              <span id="costTotal">R 0</span>
+            </div>
+          </div>
+
+
+           <button type="button" class="book-btn" id="confirmBookingBtn">
+            CONFIRM BOOKING
+           </button>
+
+
+
+
+
+          <p class="charge-note">You won't be charged until the host accepts.</p>
+
+          <div class="insurance-box">
+            Your rental is covered by our comprehensive platinum
+            insurance policy. Roadside assistance included 24/7.
+          </div>
+
+        </div>
+
+        <!-- EXTRA INFO (populated by JS) -->
+        <div class="extra-info">
+          <div>
+            <i class="fa-solid fa-gauge-high"></i>
+            <span id="extraKm">250km / day included</span>
+          </div>
+          <div>
+            <i class="fa-solid fa-gas-pump"></i>
+            <span id="extraFuel">—</span>
+          </div>
+        </div>
+
+      </div><!-- /right-side -->
+
+    </div><!-- /content-grid -->
+  </div><!-- /container -->
+
+ 
+
+  <!-- Load shared car database FIRST, then booking logic -->
+  <script src="carData.js"></script>
+  <script src="Booking.js"></script>
+  
+  
+ <script>
+document.getElementById('confirmBookingBtn').addEventListener('click', function () {
+  const pickup = document.getElementById('pickup').value;
+  const returnDate = document.getElementById('return').value;
+
+  const selectedCar = localStorage.getItem('selectedCar');
+
+  let car = {
+    id: 1,
+    name: document.getElementById('carName')?.textContent || 'Vehicle',
+    city: document.getElementById('carCity')?.textContent || 'Pretoria',
+    rating: document.getElementById('carRating')?.textContent || '5.0',
+    price: 0,
+    host: {
+      name: document.getElementById('hostName')?.textContent || 'Host',
+      since: document.getElementById('hostSince')?.textContent || 'Host since 2026'
+    }
+  };
+
+  if (selectedCar) {
+    car = JSON.parse(selectedCar);
+  }
+
+  let days = 1;
+
+  if (pickup && returnDate) {
+    const start = new Date(pickup);
+    const end = new Date(returnDate);
+    days = Math.max(1, Math.floor((end - start) / 86400000));
+  }
+
+  const dailyRate = Number(car.price) || 0;
+  const subtotal = dailyRate * days;
+  const serviceFee = Math.round(subtotal * 0.10);
+  const total = subtotal + serviceFee;
+
+  const bookingReview = {
+    car_id: car.id || '',
+    car_name: car.name || 'Vehicle',
+    car_city: car.city || 'Pretoria',
+    rating: car.rating || '5.0',
+    host_name: car.host?.name || 'Host',
+    host_since: car.host?.since || 'Host since 2026',
+    pickup_date: pickup,
+    return_date: returnDate,
+    days: days,
+    daily_rate: dailyRate,
+    service_fee: serviceFee,
+    total: total
+  };
+
+  localStorage.setItem('bookingReview', JSON.stringify(bookingReview));
+
+  window.location.href = 'Bookingtwo.html';
+});
+</script>
+  
+  
+</body>
+</html>

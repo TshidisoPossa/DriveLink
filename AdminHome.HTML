@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveLink – Admin Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="AdminH.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════
+       SIDEBAR
+  ══════════════════════════════ -->
+  <aside class="sidebar" id="sidebar">
+
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="white" width="22" height="22">
+          <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">DRIVELINK</div>
+        <div class="brand-sub">Admin Control</div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard" onclick="navigate(event,'dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+        </svg>
+        <span>Dashboard Overview</span>
+      </a>
+      <a href="#" class="nav-item" data-page="users" onclick="navigate(event,'users')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+          <circle cx="9" cy="7" r="4"/>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+        </svg>
+        <span>User Management</span>
+      </a>
+      <a href="#" class="nav-item" data-page="listings" onclick="navigate(event,'listings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 17H5v-5l2.5-6h9L19 12v5z"/>
+          <circle cx="7.5" cy="17" r="1.5"/>
+          <circle cx="16.5" cy="17" r="1.5"/>
+        </svg>
+        <span>Listings Management</span>
+      </a>
+      <a href="#" class="nav-item" data-page="bookings" onclick="navigate(event,'bookings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+          <line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/>
+          <line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        <span>Bookings Log</span>
+      </a>
+    </nav>
+
+    <!-- Admin user at bottom -->
+    <div class="sidebar-footer">
+      <div class="admin-avatar">A</div>
+      <div>
+        <div class="admin-name">Admin User</div>
+        <div class="admin-role">System Master</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ══════════════════════════════
+       MAIN
+  ══════════════════════════════ -->
+  <div class="main-wrapper">
+
+    <!-- Top bar -->
+    <header class="topbar">
+      <h1 class="page-title" id="pageTitle">PLATFORM DASHBOARD</h1>
+      <div class="topbar-actions">
+        <button class="icon-btn" id="notifBtn" onclick="toggleNotifications()" title="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+          </svg>
+          <span class="notif-dot" id="notifDot"></span>
+        </button>
+        <button class="icon-btn" onclick="openSettings()" title="Settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Notification panel -->
+      <div class="notif-panel" id="notifPanel">
+        <div class="notif-header">
+          <span>Notifications</span>
+          <button onclick="clearNotifications()">Clear all</button>
+        </div>
+        <div class="notif-list" id="notifList">
+          <div class="notif-item unread">
+            <div class="notif-icon urgent-icon">!</div>
+            <div>
+              <div class="notif-title">New urgent dispute: #DSP-9421</div>
+              <div class="notif-time">2 minutes ago</div>
+            </div>
+          </div>
+          <div class="notif-item unread">
+            <div class="notif-icon verify-icon">✓</div>
+            <div>
+              <div class="notif-title">24 verifications awaiting review</div>
+              <div class="notif-time">15 minutes ago</div>
+            </div>
+          </div>
+          <div class="notif-item">
+            <div class="notif-icon info-icon">i</div>
+            <div>
+              <div class="notif-title">System health check passed</div>
+              <div class="notif-time">1 hour ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ── DASHBOARD PAGE ── -->
+    <main class="content" id="pageDashboard">
+
+      <!-- Stat Cards -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Total Registered Users</div>
+            <div class="stat-value" id="statUsers">8,420</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon blue-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2"/>
+              <line x1="7" y1="9" x2="17" y2="9"/>
+              <line x1="7" y1="13" x2="13" y2="13"/>
+            </svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Active Listings</div>
+            <div class="stat-value" id="statListings">642</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon blue-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Pending Verifications</div>
+            <div class="stat-value" id="statVerif">24</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon blue-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="5" y="2" width="14" height="20" rx="2"/>
+              <line x1="9" y1="7" x2="15" y2="7"/>
+              <line x1="9" y1="11" x2="15" y2="11"/>
+              <line x1="9" y1="15" x2="13" y2="15"/>
+            </svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Total Bookings</div>
+            <div class="stat-value" id="statBookings">12,850</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon red-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div class="stat-body">
+            <div class="stat-label">Active Disputes</div>
+            <div class="stat-value red-value" id="statDisputes">3</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom row -->
+      <div class="bottom-grid">
+
+        <!-- Recent Disputes table -->
+        <div class="card disputes-card">
+          <div class="card-header">
+            <h2 class="card-title">RECENT DISPUTES</h2>
+            <button class="btn-view-all" onclick="navigate(null,'disputes')">View All</button>
+          </div>
+          <table class="disputes-table">
+            <thead>
+              <tr>
+                <th>Reference #</th>
+                <th>User</th>
+                <th>Reason</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="disputeBody">
+              <tr>
+                <td class="ref">#DSP-9421</td>
+                <td class="user-name">Marcus Thorne</td>
+                <td>Listing Accuracy</td>
+                <td><span class="badge badge-urgent">URGENT</span></td>
+              </tr>
+              <tr>
+                <td class="ref">#DSP-8830</td>
+                <td class="user-name">Elena Rodriguez</td>
+                <td>Payment Delay</td>
+                <td><span class="badge badge-review">UNDER REVIEW</span></td>
+              </tr>
+              <tr>
+                <td class="ref">#DSP-7712</td>
+                <td class="user-name">Jordan Smith</td>
+                <td>Cancellation Dispute</td>
+                <td><span class="badge badge-progress">IN PROGRESS</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Right widgets -->
+        <div class="widgets-col">
+
+          <!-- Verification Queue -->
+          <div class="card verif-card">
+            <div class="verif-icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="28" height="28">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                <polyline points="9 12 11 14 15 10"/>
+              </svg>
+            </div>
+            <div class="verif-body">
+              <div class="verif-title">VERIFICATION QUEUE</div>
+              <div class="verif-sub" id="verifCount">24 owners awaiting ID approval.</div>
+              <a href="#" class="verif-link" onclick="navigate(event,'verifications')">Start Processing →</a>
+            </div>
+          </div>
+
+          <!-- Avg Response -->
+          <div class="card widget-sm">
+            <div class="widget-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <div class="widget-label">Avg Response</div>
+            <div class="widget-value" id="avgResponse">1.2 HOURS</div>
+          </div>
+
+          <!-- System Status -->
+          <div class="card widget-sm">
+            <div class="widget-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="26" height="26">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <div class="widget-label">System Status</div>
+            <div class="widget-value green-value" id="sysStatus">HEALTHY</div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- ── USER MANAGEMENT PAGE ── -->
+    <main class="content hidden" id="pageUsers">
+      <div class="card" style="padding:28px">
+        <div class="card-header" style="margin-bottom:18px">
+          <h2 class="card-title">USER MANAGEMENT</h2>
+          <button class="btn-view-all">Export CSV</button>
+        </div>
+        <table class="disputes-table">
+          <thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="ref">#U-001</td><td class="user-name">Marcus Thorne</td><td>marcus@email.com</td><td>Renter</td><td><span class="badge badge-progress">ACTIVE</span></td></tr>
+            <tr><td class="ref">#U-002</td><td class="user-name">Elena Rodriguez</td><td>elena@email.com</td><td>Owner</td><td><span class="badge badge-progress">ACTIVE</span></td></tr>
+            <tr><td class="ref">#U-003</td><td class="user-name">Jordan Smith</td><td>jordan@email.com</td><td>Owner</td><td><span class="badge badge-review">SUSPENDED</span></td></tr>
+            <tr><td class="ref">#U-004</td><td class="user-name">Tshidiso M.</td><td>tshidiso@email.com</td><td>Renter</td><td><span class="badge badge-progress">ACTIVE</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- ── LISTINGS MANAGEMENT PAGE ── -->
+    <main class="content hidden" id="pageListings">
+      <div class="card" style="padding:28px">
+        <div class="card-header" style="margin-bottom:18px">
+          <h2 class="card-title">LISTINGS MANAGEMENT</h2>
+          <button class="btn-view-all">Filter</button>
+        </div>
+        <table class="disputes-table">
+          <thead><tr><th>Listing ID</th><th>Vehicle</th><th>Owner</th><th>Rate/Day</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="ref">#L-1041</td><td class="user-name">Toyota Corolla 2021</td><td>Elena Rodriguez</td><td>R 550</td><td><span class="badge badge-progress">ACTIVE</span></td></tr>
+            <tr><td class="ref">#L-1042</td><td class="user-name">Kia Sorento 2023</td><td>Jordan Smith</td><td>R 950</td><td><span class="badge badge-review">PENDING</span></td></tr>
+            <tr><td class="ref">#L-1043</td><td class="user-name">Ford Ranger 2022</td><td>Marcus Thorne</td><td>R 780</td><td><span class="badge badge-urgent">FLAGGED</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- ── BOOKINGS LOG PAGE ── -->
+    <main class="content hidden" id="pageBookings">
+      <div class="card" style="padding:28px">
+        <div class="card-header" style="margin-bottom:18px">
+          <h2 class="card-title">BOOKINGS LOG</h2>
+          <button class="btn-view-all">Export</button>
+        </div>
+        <table class="disputes-table">
+          <thead><tr><th>Booking #</th><th>Renter</th><th>Vehicle</th><th>Dates</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="ref">#BK-5501</td><td class="user-name">Tshidiso M.</td><td>VW Polo 2022</td><td>12–14 Jun</td><td>R 1,260</td><td><span class="badge badge-progress">CONFIRMED</span></td></tr>
+            <tr><td class="ref">#BK-5500</td><td class="user-name">Marcus Thorne</td><td>BMW 320i 2021</td><td>10–12 Jun</td><td>R 1,360</td><td><span class="badge badge-review">COMPLETED</span></td></tr>
+            <tr><td class="ref">#BK-5499</td><td class="user-name">Elena Rodriguez</td><td>Ford Ranger 2022</td><td>8–10 Jun</td><td>R 1,560</td><td><span class="badge badge-urgent">DISPUTED</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- ── DISPUTES PAGE ── -->
+    <main class="content hidden" id="pageDisputes">
+      <div class="card" style="padding:28px">
+        <div class="card-header" style="margin-bottom:18px">
+          <h2 class="card-title">ALL DISPUTES</h2>
+          <button class="btn-view-all" onclick="navigate(null,'dashboard')">← Back</button>
+        </div>
+        <table class="disputes-table">
+          <thead><tr><th>Reference #</th><th>User</th><th>Reason</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td class="ref">#DSP-9421</td><td class="user-name">Marcus Thorne</td><td>Listing Accuracy</td><td>12 Jun 2025</td><td><span class="badge badge-urgent">URGENT</span></td></tr>
+            <tr><td class="ref">#DSP-8830</td><td class="user-name">Elena Rodriguez</td><td>Payment Delay</td><td>10 Jun 2025</td><td><span class="badge badge-review">UNDER REVIEW</span></td></tr>
+            <tr><td class="ref">#DSP-7712</td><td class="user-name">Jordan Smith</td><td>Cancellation Dispute</td><td>8 Jun 2025</td><td><span class="badge badge-progress">IN PROGRESS</span></td></tr>
+            <tr><td class="ref">#DSP-7100</td><td class="user-name">Tshidiso M.</td><td>Vehicle Condition</td><td>3 Jun 2025</td><td><span class="badge badge-progress">IN PROGRESS</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- ── VERIFICATIONS PAGE ── -->
+    <main class="content hidden" id="pageVerifications">
+      <div class="card" style="padding:28px">
+        <div class="card-header" style="margin-bottom:18px">
+          <h2 class="card-title">VERIFICATION QUEUE</h2>
+          <button class="btn-view-all" onclick="navigate(null,'dashboard')">← Back</button>
+        </div>
+        <table class="disputes-table">
+          <thead><tr><th>Owner</th><th>Submitted</th><th>Document</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td class="user-name">Sipho Nkosi</td><td>Today, 09:14</td><td>ID + RC1 Form</td><td><button class="btn-approve" onclick="approveVerif(this)">Approve</button></td></tr>
+            <tr><td class="user-name">Ayanda Dube</td><td>Today, 08:50</td><td>ID + Roadworthy</td><td><button class="btn-approve" onclick="approveVerif(this)">Approve</button></td></tr>
+            <tr><td class="user-name">Priya Singh</td><td>Yesterday</td><td>ID + Insurance</td><td><button class="btn-approve" onclick="approveVerif(this)">Approve</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+
+  </div><!-- /main-wrapper -->
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script src="AdminH.js"></script>
+</body>
+</html>
