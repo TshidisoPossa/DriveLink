@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveLink – Documents & Submit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CarListFour.css" />
+</head>
+<body>
+
+  <!-- ── NAV (matches CarListTwo) ── -->
+  <nav class="navbar">
+    <a href="#" class="brand">DRIVELINK</a>
+    <div class="nav-center">
+      <a href="#">Browse</a>
+      <a href="#">How it works</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR (matches CarListTwo) ── -->
+    <aside class="sidebar">
+
+      <div class="step-item done" id="step-1">
+        <div class="step-icon done-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label">STEP 1</span>
+          <span class="step-name">Vehicle Information</span>
+        </div>
+      </div>
+
+      <div class="step-connector done"></div>
+
+      <div class="step-item done" id="step-2">
+        <div class="step-icon done-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label">STEP 2</span>
+          <span class="step-name">Photos</span>
+        </div>
+      </div>
+
+      <div class="step-connector done"></div>
+
+      <div class="step-item done" id="step-3">
+        <div class="step-icon done-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label">STEP 3</span>
+          <span class="step-name">Pricing &amp; Availability</span>
+        </div>
+      </div>
+
+      <div class="step-connector done"></div>
+
+      <div class="step-item done" id="step-4">
+        <div class="step-icon done-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label">STEP 4</span>
+          <span class="step-name">Features &amp; Rules</span>
+        </div>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-item active" id="step-5">
+        <div class="step-icon active-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label active-label">STEP 5</span>
+          <span class="step-name active-name">Documents &amp; Submit</span>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN CONTENT ── -->
+    <main class="content">
+
+      <h1 class="page-title">DOCUMENTS &amp; SUBMISSION</h1>
+      <p class="page-sub">Final step! To ensure the safety of our community, please confirm ownership and upload your legal documents for verification.</p>
+
+      <!-- DOC GRID -->
+      <div class="doc-section">
+        <div class="doc-grid">
+
+          <!-- Are you the owner? -->
+          <div class="doc-card">
+            <div class="doc-card-header">
+              <svg class="doc-icon" viewBox="0 0 48 48" fill="none">
+                <rect x="10" y="6" width="28" height="36" rx="4" stroke="#1a56db" stroke-width="2.5" fill="none"/>
+                <circle cx="24" cy="20" r="6" stroke="#1a56db" stroke-width="2.2" fill="none"/>
+                <path d="M14 38c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="#1a56db" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+              </svg>
+              <h3 class="doc-title">Are you the owner?</h3>
+            </div>
+            <p class="doc-note-text">Confirm that you are the registered owner of the vehicle.</p>
+            <div class="yn-toggle" id="ownerToggle">
+              <button class="yn-btn" data-val="yes" onclick="selectYN('ownerToggle','yes')">Yes</button>
+              <button class="yn-btn" data-val="no"  onclick="selectYN('ownerToggle','no')">No</button>
+            </div>
+            <p class="doc-note warn" id="ownerNote" style="display:none;">
+              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Note: Only registered owners may list vehicles on DriveLink.
+            </p>
+          </div>
+
+          <!-- Comprehensive Insurance -->
+          <div class="doc-card">
+            <div class="doc-card-header">
+              <svg class="doc-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M24 6L10 12v12c0 9 6.5 16.5 14 18 7.5-1.5 14-9 14-18V12L24 6z" stroke="#1a56db" stroke-width="2.5" fill="none"/>
+                <polyline points="17,24 22,29 32,19" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h3 class="doc-title">Comprehensive Insurance?</h3>
+            </div>
+            <p class="doc-note-text">Does the vehicle have comprehensive insurance cover?</p>
+            <div class="yn-toggle" id="insuranceToggle">
+              <button class="yn-btn" data-val="yes" onclick="selectYN('insuranceToggle','yes')">Yes</button>
+              <button class="yn-btn" data-val="no"  onclick="selectYN('insuranceToggle','no')">No</button>
+            </div>
+            <p class="doc-note warn" id="insuranceNote" style="display:none;">
+              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Note: Comprehensive cover is required to list on DriveLink.
+            </p>
+          </div>
+
+          <!-- Roadworthy Certificate -->
+          <div class="doc-card">
+            <div class="doc-card-header">
+              <svg class="doc-icon" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="16" stroke="#1a56db" stroke-width="2.5" fill="none"/>
+                <polyline points="17,24 22,29 32,19" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <h3 class="doc-title">Valid Roadworthy Certificate</h3>
+            </div>
+            <div class="upload-zone" id="roadworthyZone"
+              onclick="triggerUpload('roadworthyInput')"
+              ondragover="handleDragOver(event)"
+              ondragleave="handleDragLeave(event)"
+              ondrop="handleDrop(event,'roadworthyInput','roadworthyZone','roadworthyName')">
+              <svg class="upload-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M24 32V16M17 23l7-7 7 7" stroke="#1a56db" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="8" y="36" width="32" height="4" rx="2" fill="#e8f0fe"/>
+              </svg>
+              <span class="upload-cta">Click to upload or drag and drop</span>
+              <span class="upload-hint">PDF, JPG, or PNG (Max 10MB)</span>
+              <span class="upload-filename" id="roadworthyName"></span>
+              <input type="file" id="roadworthyInput" accept=".pdf,.jpg,.jpeg,.png" style="display:none"
+                onchange="showFilename(this,'roadworthyName','roadworthyZone')">
+            </div>
+            <p class="doc-note warn">
+              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Note: Must not be expired.
+            </p>
+          </div>
+
+          <!-- Current Licence Disc -->
+          <div class="doc-card">
+            <div class="doc-card-header">
+              <svg class="doc-icon" viewBox="0 0 48 48" fill="none">
+                <rect x="10" y="10" width="28" height="28" rx="4" stroke="#1a56db" stroke-width="2.5" fill="none"/>
+                <rect x="16" y="18" width="10" height="12" rx="2" stroke="#1a56db" stroke-width="2" fill="none"/>
+                <path d="M30 20h0M30 24h0M30 28h0" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+              <h3 class="doc-title">Current Licence Disc</h3>
+            </div>
+            <div class="upload-zone" id="licenceZone"
+              onclick="triggerUpload('licenceInput')"
+              ondragover="handleDragOver(event)"
+              ondragleave="handleDragLeave(event)"
+              ondrop="handleDrop(event,'licenceInput','licenceZone','licenceName')">
+              <svg class="upload-icon" viewBox="0 0 48 48" fill="none">
+                <path d="M24 32V16M17 23l7-7 7 7" stroke="#1a56db" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="8" y="36" width="32" height="4" rx="2" fill="#e8f0fe"/>
+              </svg>
+              <span class="upload-cta">Click to upload or drag and drop</span>
+              <span class="upload-hint">JPG or PNG (Max 5MB)</span>
+              <span class="upload-filename" id="licenceName"></span>
+              <input type="file" id="licenceInput" accept=".jpg,.jpeg,.png" style="display:none"
+                onchange="showFilename(this,'licenceName','licenceZone')">
+            </div>
+            <p class="doc-note warn">
+              <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M8 5v3M8 11v.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Note: Must be in-date and visible.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- REVIEW NOTICE -->
+      <div class="review-banner">
+        <svg viewBox="0 0 20 20" fill="none" width="20" height="20" style="flex-shrink:0;margin-top:1px">
+          <circle cx="10" cy="10" r="9" stroke="#1a56db" stroke-width="1.5"/>
+          <path d="M10 6v4M10 14v.5" stroke="#1a56db" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <strong>Ready for Review</strong>
+          <p>Once submitted, our Admin team will review your listing and documents within 24 hours. You'll receive a notification as soon as your car is live on the marketplace.</p>
+        </div>
+      </div>
+
+      <!-- FOOTER ACTIONS -->
+      <div class="footer-divider"></div>
+      <div class="form-footer">
+        <button class="btn-back" onclick="history.back()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+          Back
+        </button>
+        <button class="btn-continue" onclick="handleSubmit()">
+          Submit Listing
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-box">
+      <div class="modal-icon">
+        <svg viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="22" stroke="#1a56db" stroke-width="2.5"/>
+          <polyline points="14,24 21,31 34,17" stroke="#1a56db" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2>Listing Submitted!</h2>
+      <p>Your listing is under review. We'll notify you within 24 hours once your car is live.</p>
+      <button class="btn-continue" style="width:100%;margin-top:8px;justify-content:center" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+
+  <script src="CarListFour.js"></script>
+</body>
+</html>

@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DriveLink – Browse Cars</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="RenterDashboard.css">
+  <style>
+    /* ── Quick rate widget (added) ── */
+    .quick-rate {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin: 8px 0;
+    }
+    .quick-rate .qstar {
+      cursor: pointer;
+      font-size: 20px;
+      color: #e5e7eb;
+      transition: color 0.15s, transform 0.1s;
+      user-select: none;
+    }
+    .quick-rate .qstar:hover,
+    .quick-rate .qstar.hovered { color: #fbbf24; transform: scale(1.15); }
+    .quick-rate .qstar.active { color: #f59e0b; }
+    .quick-rate-label {
+      font-size: 12px;
+      color: #6b7280;
+      margin-left: 4px;
+    }
+    .quick-rate-saved {
+      font-size: 12px;
+      color: #1a56db;
+      font-weight: 600;
+      margin-left: 4px;
+      display: none;
+    }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #1a56db;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(26,86,219,0.3);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s, transform 0.25s;
+      z-index: 3000;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar">
+    <div class="nav-logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18">
+          <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+        </svg>
+      </div>
+      <span class="logo-name">DRIVE<span>LINK</span></span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="#" class="active">Browse Cars</a></li>
+      <li><a href="#">How It Works</a></li>
+    </ul>
+
+    <div class="nav-profile">
+      <button class="profile-btn" onclick="toggleDropdown()">
+        <div class="avatar">T</div>
+        <span class="greeting">Hi, Tshidiso</span>
+        <svg class="chevron" id="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+
+      <div class="dropdown" id="dropdown">
+        <div class="dropdown-header">
+          <div class="dropdown-avatar">T</div>
+          <div>
+            <div class="dropdown-name">Tshidiso P.</div>
+            <div class="dropdown-email">tshidiso@email.com</div>
+          </div>
+        </div>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Browse Cars
+        </a>
+        <a href="MyBookings.html" class="dropdown-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          My Bookings
+        </a>
+        <a href="#" class="dropdown-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="#" class="dropdown-item logout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Log Out
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ LAYOUT ══ -->
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-profile">
+        <div class="sidebar-avatar">T</div>
+        <div>
+          <div class="sidebar-name">Tshidiso M.</div>
+          <div class="sidebar-badge"><span class="badge-dot"></span>Verified</div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Browse Cars
+        </a>
+        <a href="MyBookings.html" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          My Bookings
+        </a>
+        <a href="MyListings.html" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17H5v-5l2.5-6h9L19 12v5z"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></svg>
+          My Listings
+        </a>
+  
+        <div class="sidebar-divider"></div>
+        <a href="index.html" class="sidebar-link logout-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Log Out
+        </a>
+      </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- Welcome banner -->
+      <div class="welcome-banner">
+        <div>
+          <p class="welcome-label">Welcome back 👋</p>
+          <h1 class="welcome-title">Good morning, <span>Tshidiso</span></h1>
+          <p class="welcome-sub">Browse verified cars near you and book in minutes.</p>
+        </div>
+        <a href="CarlistOne.html" class="btn-list-car">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          List a Car
+        </a>
+      </div>
+
+      <!-- Filter bar -->
+      <div class="filter-bar">
+        <div class="filter-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="searchInput" placeholder="Search by city, area or car model…" oninput="filterCars()"/>
+        </div>
+        <select class="filter-select" id="typeFilter" onchange="filterCars()">
+          <option value="">All Types</option>
+          <option value="Sedan">Sedan</option>
+          <option value="SUV">SUV</option>
+          <option value="Hatchback">Hatchback</option>
+          <option value="Bakkie">Bakkie</option>
+          <option value="Minivan">Minivan</option>
+        </select>
+        <select class="filter-select" id="priceFilter" onchange="filterCars()">
+          <option value="">Any Price</option>
+          <option value="low">Under R 600/day</option>
+          <option value="mid">R 600 – R 1 000/day</option>
+          <option value="high">Over R 1 000/day</option>
+        </select>
+        <select class="filter-select" id="locationFilter" onchange="filterCars()">
+          <option value="">All Locations</option>
+          <option value="Johannesburg">Johannesburg</option>
+          <option value="Cape Town">Cape Town</option>
+          <option value="Pretoria">Pretoria</option>
+          <option value="Durban">Durban</option>
+          <option value="Sandton">Sandton</option>
+        </select>
+      </div>
+
+      <div class="results-row">
+        <span class="results-count" id="resultsCount">12 cars available</span>
+      </div>
+
+      <!-- ══ CAR GRID ══ -->
+      <div class="car-grid" id="carGrid">
+
+        <!-- Car 1 -->
+        <div class="car-card" data-type="Sedan" data-price="550" data-location="Johannesburg" data-carid="1" data-hostname="Thandi M.">
+          <div class="car-img">
+            <img src="images/car-1.jpg" alt="Toyota Corolla 2021" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-1" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Sedan</span>
+            <span class="tag-price">R 550/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Toyota Corolla 2021</h3>
+              <div class="car-rating">⭐ 4.8 <span>(24)</span></div>
+            </div>
+            <div class="car-location">📍 Johannesburg · Auto · 2021</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>Air Con</span></div>
+
+            <!-- Quick rate widget -->
+            <div class="quick-rate" data-carid="1"></div>
+
+            <button class="btn-book" onclick="bookCar(1)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 2 -->
+        <div class="car-card" data-type="SUV" data-price="950" data-location="Cape Town" data-carid="2" data-hostname="Ayanda D.">
+          <div class="car-img">
+            <img src="images/car-2.jpg" alt="Kia Sorento 2023" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-2" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 28 L16 10 Q18 6 28 6 L72 6 Q82 6 84 10 L92 28 L92 33 Q92 35 90 35 L10 35 Q8 35 8 33 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="23" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">SUV</span>
+            <span class="tag-price">R 950/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Kia Sorento 2023</h3>
+              <div class="car-rating">⭐ 4.9 <span>(41)</span></div>
+            </div>
+            <div class="car-location">📍 Cape Town · Auto · 2023</div>
+            <div class="car-features"><span>7 Seats</span><span>Petrol</span><span>Air Con</span></div>
+
+            <div class="quick-rate" data-carid="2"></div>
+
+            <button class="btn-book" onclick="bookCar(2)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 3 -->
+        <div class="car-card" data-type="Hatchback" data-price="420" data-location="Pretoria" data-carid="3" data-hostname="Ayanda D.">
+          <div class="car-img">
+            <img src="images/car-3.jpg" alt="VW Polo 2020" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-3" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M12 28 L22 14 Q24 10 34 10 L66 10 Q76 10 78 14 L88 28 L88 32 Q88 34 86 34 L14 34 Q12 34 12 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="27" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="73" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Hatchback</span>
+            <span class="tag-price">R 420/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">VW Polo 2020</h3>
+              <div class="car-rating">⭐ 4.7 <span>(18)</span></div>
+            </div>
+            <div class="car-location">📍 Pretoria · Manual · 2020</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>Bluetooth</span></div>
+
+            <div class="quick-rate" data-carid="3"></div>
+
+            <button class="btn-book" onclick="bookCar(3)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 4 -->
+        <div class="car-card" data-type="Bakkie" data-price="780" data-location="Durban" data-carid="4" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-4.jpg" alt="Ford Ranger 2022" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-4" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 26 L14 12 Q16 8 26 8 L55 8 L55 26 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M55 14 L55 26 L92 26 L92 30 Q92 34 90 34 L10 34 Q8 34 8 30 L8 26 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><circle cx="23" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Bakkie</span>
+            <span class="tag-price">R 780/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Ford Ranger 2022</h3>
+              <div class="car-rating">⭐ 4.6 <span>(33)</span></div>
+            </div>
+            <div class="car-location">📍 Durban · Auto · 2022</div>
+            <div class="car-features"><span>5 Seats</span><span>Diesel</span><span>4x4</span></div>
+
+            <div class="quick-rate" data-carid="4"></div>
+
+            <button class="btn-book" onclick="bookCar(4)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 5 -->
+        <div class="car-card" data-type="Sedan" data-price="680" data-location="Sandton" data-carid="5" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-5.jpg" alt="BMW 320i 2021" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-5" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Sedan</span>
+            <span class="tag-price">R 680/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">BMW 320i 2021</h3>
+              <div class="car-rating">⭐ 5.0 <span>(12)</span></div>
+            </div>
+            <div class="car-location">📍 Sandton · Auto · 2021</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>Sunroof</span></div>
+
+            <div class="quick-rate" data-carid="5"></div>
+
+            <button class="btn-book" onclick="bookCar(5)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 6 -->
+        <div class="car-card" data-type="Hatchback" data-price="390" data-location="Johannesburg" data-carid="6" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-6.jpg" alt="Hyundai i20 2019" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-6" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M12 28 L22 14 Q24 10 34 10 L66 10 Q76 10 78 14 L88 28 L88 32 Q88 34 86 34 L14 34 Q12 34 12 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="27" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="73" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Hatchback</span>
+            <span class="tag-price">R 390/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Hyundai i20 2019</h3>
+              <div class="car-rating">⭐ 4.5 <span>(29)</span></div>
+            </div>
+            <div class="car-location">📍 Johannesburg · Manual · 2019</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>USB Port</span></div>
+
+            <div class="quick-rate" data-carid="6"></div>
+
+            <button class="btn-book" onclick="bookCar(6)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 7 -->
+        <div class="car-card" data-type="SUV" data-price="1100" data-location="Cape Town" data-carid="7" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-7.jpg" alt="Toyota Fortuner 2022" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-7" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 28 L16 10 Q18 6 28 6 L72 6 Q82 6 84 10 L92 28 L92 33 Q92 35 90 35 L10 35 Q8 35 8 33 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="23" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">SUV</span>
+            <span class="tag-price">R 1,100/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Toyota Fortuner 2022</h3>
+              <div class="car-rating">⭐ 4.8 <span>(55)</span></div>
+            </div>
+            <div class="car-location">📍 Cape Town · Auto · 2022</div>
+            <div class="car-features"><span>7 Seats</span><span>Diesel</span><span>4x4</span></div>
+
+            <div class="quick-rate" data-carid="7"></div>
+
+            <button class="btn-book" onclick="bookCar(7)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 8 -->
+        <div class="car-card" data-type="Minivan" data-price="720" data-location="Pretoria" data-carid="8" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-8.jpg" alt="Toyota HiAce 2020" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-8" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M6 28 L12 10 Q14 6 24 6 L76 6 Q84 6 86 10 L94 28 L94 34 L6 34 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="22" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="78" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Minivan</span>
+            <span class="tag-price">R 720/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Toyota HiAce 2020</h3>
+              <div class="car-rating">⭐ 4.4 <span>(37)</span></div>
+            </div>
+            <div class="car-location">📍 Pretoria · Manual · 2020</div>
+            <div class="car-features"><span>14 Seats</span><span>Diesel</span><span>Large Boot</span></div>
+
+            <div class="quick-rate" data-carid="8"></div>
+
+            <button class="btn-book" onclick="bookCar(8)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 9 -->
+        <div class="car-card" data-type="Sedan" data-price="490" data-location="Durban" data-carid="9" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-9.jpg" alt="Nissan Almera 2020" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-1" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M10 28 L18 12 Q20 8 30 8 L70 8 Q80 8 82 12 L90 28 L90 32 Q90 34 88 34 L12 34 Q10 34 10 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="25" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="75" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Sedan</span>
+            <span class="tag-price">R 490/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Nissan Almera 2020</h3>
+              <div class="car-rating">⭐ 4.6 <span>(21)</span></div>
+            </div>
+            <div class="car-location">📍 Durban · Auto · 2020</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>Air Con</span></div>
+
+            <div class="quick-rate" data-carid="9"></div>
+
+            <button class="btn-book" onclick="bookCar(9)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 10 -->
+        <div class="car-card" data-type="Bakkie" data-price="850" data-location="Sandton" data-carid="10" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-10.jpg" alt="Isuzu D-Max 2023" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-4" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 26 L14 12 Q16 8 26 8 L55 8 L55 26 Z" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><path d="M55 14 L55 26 L92 26 L92 30 Q92 34 90 34 L10 34 Q8 34 8 30 L8 26 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.25)" stroke-width="1"/><circle cx="23" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Bakkie</span>
+            <span class="tag-price">R 850/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Isuzu D-Max 2023</h3>
+              <div class="car-rating">⭐ 4.7 <span>(16)</span></div>
+            </div>
+            <div class="car-location">📍 Sandton · Auto · 2023</div>
+            <div class="car-features"><span>5 Seats</span><span>Diesel</span><span>Canopy</span></div>
+
+            <div class="quick-rate" data-carid="10"></div>
+
+            <button class="btn-book" onclick="bookCar(10)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 11 -->
+        <div class="car-card" data-type="SUV" data-price="880" data-location="Johannesburg" data-carid="11" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-11.jpg" alt="Haval H6 2022" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-3" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M8 28 L16 10 Q18 6 28 6 L72 6 Q82 6 84 10 L92 28 L92 33 Q92 35 90 35 L10 35 Q8 35 8 33 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="23" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/><circle cx="77" cy="35" r="5.5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">SUV</span>
+            <span class="tag-price">R 880/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Haval H6 2022</h3>
+              <div class="car-rating">⭐ 4.5 <span>(9)</span></div>
+            </div>
+            <div class="car-location">📍 Johannesburg · Auto · 2022</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>360 Cam</span></div>
+
+            <div class="quick-rate" data-carid="11"></div>
+
+            <button class="btn-book" onclick="bookCar(11)">Book Now →</button>
+          </div>
+        </div>
+
+        <!-- Car 12 -->
+        <div class="car-card" data-type="Hatchback" data-price="450" data-location="Cape Town" data-carid="12" data-hostname="">
+          <div class="car-img">
+            <img src="images/car-12.jpg" alt="Renault Clio 2021" class="car-photo"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="car-img-fallback grad-6" style="display:none;">
+              <svg viewBox="0 0 100 40" fill="none"><path d="M12 28 L22 14 Q24 10 34 10 L66 10 Q76 10 78 14 L88 28 L88 32 Q88 34 86 34 L14 34 Q12 34 12 32 Z" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/><circle cx="27" cy="34" r="5" fill="rgba(255,255,255,0.2)"/><circle cx="73" cy="34" r="5" fill="rgba(255,255,255,0.2)"/></svg>
+            </div>
+            <span class="tag-type">Hatchback</span>
+            <span class="tag-price">R 450/day</span>
+          </div>
+          <div class="car-body">
+            <div class="car-top-row">
+              <h3 class="car-name">Renault Clio 2021</h3>
+              <div class="car-rating">⭐ 4.8 <span>(14)</span></div>
+            </div>
+            <div class="car-location">📍 Cape Town · Manual · 2021</div>
+            <div class="car-features"><span>5 Seats</span><span>Petrol</span><span>Apple CarPlay</span></div>
+
+            <div class="quick-rate" data-carid="12"></div>
+
+            <button class="btn-book" onclick="bookCar(12)">Book Now →</button>
+          </div>
+        </div>
+
+      </div><!-- /car-grid -->
+
+      <!-- No results -->
+      <div class="no-results" id="noResults" style="display:none;">
+        <p>No cars found. <button onclick="resetFilters()">Clear Filters</button></p>
+      </div>
+
+    </main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="CarData.js"></script>
+  <script src="RenterDashboard.js"></script>
+
+  <script>
+    // ════════════════════════════════════════════
+    //  QUICK RATE — renders stars on every .car-card
+    //  and submits straight to submit_review.php
+    // ════════════════════════════════════════════
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    function buildQuickRate(container, carId, hostName) {
+      container.innerHTML = '';
+      let current = 0;
+
+      for (let i = 1; i <= 5; i++) {
+        const star = document.createElement('span');
+        star.className = 'qstar';
+        star.textContent = '★';
+        star.dataset.val = i;
+
+        star.addEventListener('mouseenter', () => paintStars(container, i));
+        star.addEventListener('mouseleave', () => paintStars(container, current));
+        star.addEventListener('click', () => {
+          current = i;
+          paintStars(container, i);
+          submitQuickRating(carId, i, hostName, container);
+        });
+
+        container.appendChild(star);
+      }
+
+      const label = document.createElement('span');
+      label.className = 'quick-rate-label';
+      label.textContent = 'Rate this car';
+      container.appendChild(label);
+
+      const saved = document.createElement('span');
+      saved.className = 'quick-rate-saved';
+      saved.textContent = '✓ Rated';
+      container.appendChild(saved);
+    }
+
+    function paintStars(container, upto) {
+      container.querySelectorAll('.qstar').forEach((s, i) => {
+        s.classList.toggle('active', i < upto);
+      });
+    }
+
+    function submitQuickRating(carId, rating, hostName, container) {
+      const label = container.querySelector('.quick-rate-label');
+      const saved = container.querySelector('.quick-rate-saved');
+      label.textContent = 'Saving…';
+
+      fetch('submit_review.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          car_id: carId,
+          rating_overall: rating,
+          host_name: hostName || '',
+          review_text: '', // quick rate has no written review
+          quick_tags: ''
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          label.style.display = 'none';
+          saved.style.display = 'inline';
+          showToast('Thanks for rating this car!');
+        } else {
+          label.textContent = 'Rate this car';
+          showToast(data.message || 'Could not save rating.');
+        }
+      })
+      .catch(() => {
+        label.textContent = 'Rate this car';
+        showToast('Network error — please try again.');
+      });
+    }
+
+    // Initialize quick-rate widgets on all hardcoded cards
+    document.querySelectorAll('.quick-rate').forEach(el => {
+      const card = el.closest('.car-card');
+      const carId = el.dataset.carid;
+      const hostName = card ? card.dataset.hostname : '';
+      buildQuickRate(el, carId, hostName);
+    });
+  </script>
+
+  <script>
+    // ════════════════════════════════════════════
+    //  Load real cars from the vehicles table
+    // ════════════════════════════════════════════
+    fetch('get_vehicles.php')
+      .then(response => response.json())
+      .then(vehicles => {
+        const carGrid = document.getElementById('carGrid');
+        const grads = ['grad-1','grad-2','grad-3','grad-4','grad-5','grad-6','grad-7','grad-8'];
+
+        vehicles.forEach((vehicle, index) => {
+          if (!vehicle.make || !vehicle.model) return;
+          const grad  = grads[index % grads.length];
+          const price = parseFloat(vehicle.daily_rate) || 0;
+          const imgSrc = vehicle.front_exterior_photo || '';
+          const carId = vehicle.id;
+
+          const imgHtml = imgSrc
+            ? `<img src="${imgSrc}" alt="${vehicle.make} ${vehicle.model}" class="car-photo"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+               <div class="car-img-fallback ${grad}" style="display:none;"></div>`
+            : `<div class="car-img-fallback ${grad}" style="display:flex;"></div>`;
+
+          const card = document.createElement('div');
+          card.className = 'car-card';
+          card.setAttribute('data-type',     vehicle.vehicle_category || '');
+          card.setAttribute('data-price',    price);
+          card.setAttribute('data-location', '');
+          card.setAttribute('data-carid',    carId);
+          card.setAttribute('data-hostname', '');
+
+          card.innerHTML = `
+            <div class="car-img">
+              ${imgHtml}
+              <span class="tag-type">${vehicle.vehicle_category || 'Car'}</span>
+              <span class="tag-price">R ${price.toLocaleString()}/day</span>
+            </div>
+            <div class="car-body">
+              <div class="car-top-row">
+                <h3 class="car-name">${vehicle.make} ${vehicle.model} ${vehicle.year}</h3>
+                <div class="car-rating">⭐ New</div>
+              </div>
+              <div class="car-location">📍 ${vehicle.vehicle_category} · ${vehicle.transmission} · ${vehicle.year}</div>
+              <div class="car-features">
+                <span>${vehicle.fuel_type}</span>
+                <span>${vehicle.kilometers} km</span>
+                <span>${vehicle.transmission}</span>
+              </div>
+              <div class="quick-rate" data-carid="${carId}"></div>
+              <button class="btn-book" onclick="alert('Booking coming soon!')">Book Now →</button>
+            </div>
+          `;
+
+          carGrid.appendChild(card);
+
+          // wire up quick-rate for this newly added card
+          const qr = card.querySelector('.quick-rate');
+          buildQuickRate(qr, carId, '');
+        });
+
+        // Update results count
+        const total = document.querySelectorAll('.car-card').length;
+        const countEl = document.getElementById('resultsCount');
+        if (countEl) countEl.textContent = total + ' cars available';
+      })
+      .catch(error => console.log('Could not load database cars:', error));
+  </script>
+
+</body>
+</html>

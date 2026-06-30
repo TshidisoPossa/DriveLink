@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DriveLink Desktop</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Figtree:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="container nav-container">
+    <h1 class="logo">DriveLink</h1>
+
+    <nav>
+      <a href="#">Browse</a>
+      <a href="#">How it Works</a>
+      <a href="#">Contact</a>
+    </nav>
+
+    <div class="nav-buttons">
+	  <a href="Login.html" class="Login"> Login</a>
+      
+      <button class="primary-btn" onclick="window.location.href='Reg.html'">Get Started</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero container">
+  <div class="hero-text">
+    <h1>Drive someone's car.</h1>
+    <p>
+      Skip the rental counter. Rent verified cars from real people in your city.
+    </p>
+
+    <div class="hero-buttons">
+      <button class="primary-btn">Find a car</button>
+      <button class="outline-btn">List your car</button>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1502877338535-766e1452684a" alt="car">
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured container">
+  <div class="section-header">
+    <h2>Featured Fleet</h2>
+    <a href="#">View all cars</a>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1605559424843-9e4c228bf1c2">
+      <h3>Mercedes-benz GT </h3>
+      <p>Cape Town</p>
+      <span class="price">R1,2500</span>
+      <button>Book Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1542362567-b07e54358753">
+      <h3>Maclaren p3</h3>
+      <p>Sandton</p>
+      <span class="price">R1,800</span>
+      <button>Book Now</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1606611013016-969c19ba27bb">
+      <h3>ford</h3>
+      <p>Umhlanga</p>
+      <span class="price">R2,100</span>
+      <button>Book Now</button>
+    </div>
+
+  </div>
+</section>
+<!-- HOW IT WORKS SECTION -->
+<section class="py-24 px-margin-desktop bg-surface-container-low">
+  <div class="container-max mx-auto">
+
+    <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase mb-16 text-center">
+      How it Works
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Step 1: Find your car -->
+      <div class="relative glass-card p-8 rounded-2xl overflow-hidden group">
+        <span class="absolute top-6 right-6 text-on-surface/10 text-5xl font-bold">01</span>
+
+        <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/10 text-primary mb-6">
+          <span class="material-symbols-outlined text-2xl">search</span>
+        </div>
+
+        <h3 class="font-headline-md text-xl text-on-surface mb-2">Find your car</h3>
+        <p class="text-secondary text-sm">
+          Search by city, dates, and vibe. Filter by price, type, transmission and more.
+        </p>
+      </div>
+
+      <!-- Step 2: Book with confidence -->
+      <div class="relative glass-card p-8 rounded-2xl overflow-hidden group">
+        <span class="absolute top-6 right-6 text-on-surface/10 text-5xl font-bold">02</span>
+
+        <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/10 text-primary mb-6">
+          <span class="material-symbols-outlined text-2xl">verified_user</span>
+        </div>
+
+        <h3 class="font-headline-md text-xl text-on-surface mb-2">Book with confidence</h3>
+        <p class="text-secondary text-sm">
+          Every host is ID-verified. Every trip includes insurance and 24/7 roadside.
+        </p>
+      </div>
+
+      <!-- Step 3: Hit the road -->
+      <div class="relative glass-card p-8 rounded-2xl overflow-hidden group">
+        <span class="absolute top-6 right-6 text-on-surface/10 text-5xl font-bold">03</span>
+
+        <div class="w-14 h-14 flex items-center justify-center rounded-xl bg-primary/10 text-primary mb-6">
+          <span class="material-symbols-outlined text-2xl">directions_car</span>
+        </div>
+
+        <h3 class="font-headline-md text-xl text-on-surface mb-2">Hit the road</h3>
+        <p class="text-secondary text-sm">
+          Meet your host, sign the digital agreement, grab the keys and go.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EARN BANNER SECTION -->
+<section class="py-24 px-margin-desktop">
+  <div class="container-max mx-auto">
+
+    <div class="relative rounded-3xl overflow-hidden p-16 flex flex-col lg:flex-row items-center justify-between bg-on-surface">
+
+      <!-- Background image -->
+      <div class="absolute inset-0 opacity-40">
+        <img
+          class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuB82jNQOsqgeAtoax0ul-MhF-KvH5rMMpTqv1f9dkQOtMaPXOzJ8ZYS2f_Ux_SrS9es2AtgRucctWEEVpxF7NmbPvbYPz16EPPacfXIOdipRQ6CFY7e0xAwcWInp51LNNkTQZdtSL2NZXaoDnl4jmMZpHk9XRSBiLkp2p-IbAUgzVo9Ulhd2_T6vSMOG3e4l66t2qmkQjcq3zl-KU_xUeFI6BrYKLY1ce0rfHJfeVht85wEz1DKz665_uxj3joWBa2EBzxTBoPWzJ0"
+          alt="Car earning background"
+        />
+      </div>
+
+      <!-- Gradient overlay -->
+      <div class="absolute inset-0 bg-gradient-to-r from-primary/20 via-transparent to-transparent"></div>
+
+      <!-- Left: Text content -->
+      <div class="relative z-10 max-w-xl">
+        <h2 class="font-display-xl text-5xl text-white mb-6 leading-tight">
+          Your car,
+          <span class="bg-primary px-2">earning while</span><br>
+          you sleep.
+        </h2>
+
+        <p class="text-white/80">
+          The average host earns R8,400 per month.<br>
+          Listing takes ten minutes.
+        </p>
+      </div>
+
+      <!-- Right: Call-to-action button -->
+      <div class="relative z-10 mt-8 lg:mt-0">
+        <button class="bg-primary text-white px-10 py-4 rounded-xl font-headline-md uppercase tracking-wider btn-glow hover:brightness-110 transition-all">
+          Become a host →
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+</body>
+</html>

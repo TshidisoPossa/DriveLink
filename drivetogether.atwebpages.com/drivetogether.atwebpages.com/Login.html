@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DriveLink Login</title>
+  <link rel="stylesheet" href="Login.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="page">
+    <div class="login-card">
+      <div class="login-main">
+        <h1 class="welcome-title">WELCOME BACK</h1>
+        <p class="welcome-subtitle">
+          Access your dashboard to manage fleet operations.
+        </p>
+
+        <form class="login-form">
+          <!-- Email -->
+          <div class="field-group">
+            <label for="email">EMAIL</label>
+            <div class="field-wrapper">
+              <span class="field-icon">
+                <!-- simple mail icon using characters -->
+                ✉
+              </span>
+              <input
+                id="email"
+                type="email"
+                placeholder="name@gmail.com"
+              >
+            </div>
+          </div>
+
+          <!-- Password -->
+          <div class="field-group">
+            <div class="label-row">
+              <label for="password">PASSWORD</label>
+              <a href="ForgotPassword.html" class="forgot-link">FORGOT PASSWORD?</a>
+            </div>
+            <div class="field-wrapper">
+              <span class="field-icon">
+                🔒
+              </span>
+              <input
+                id="password"
+                type="password"
+                placeholder="••••••••"
+              >
+            </div>
+          </div>
+
+          <!-- Primary button -->
+          <a href="RenterDashboard.html" class="btn primary-btn Login">
+              Sign In to DriveLink
+              <span class="arrow">→</span>
+          </a>
+
+          <!-- Internal use text -->
+          <p class="internal-text">INTERNAL USE ONLY</p>
+
+          <!-- Admin button -->
+          <button type="button" class="btn admin-btn" onclick="window.location.href='AdminLogin.html'">
+             <span class="admin-icon">⚙</span>
+              Admin Login
+           </button>
+		  
+        </form>
+
+        <p class="footer-text">
+          New to DriveLink?
+          <a href="registration.html" class="request-link">Request Account</a>
+        </p>
+      </div>
+
+      <aside class="right-panel">
+        <h2 class="brand-name">DRIVELINK</h2>
+        <p class="brand-copy">
+          Accelerating your Driving experience.
+        </p>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>

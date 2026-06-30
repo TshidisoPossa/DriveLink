@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Photos — DriveLink</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CarListTwo.css" />
+</head>
+<body>
+
+  <!-- ── NAV ── -->
+  <nav class="navbar">
+    <a href="#" class="brand">DRIVELINK</a>
+    <div class="nav-center">
+      <a href="#">Browse</a>
+      <a href="#">How it works</a>
+      <a href="#">Contact</a>
+    </div>
+    
+  </nav>
+
+  <div class="layout">
+
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar">
+
+      <div class="step-item done" id="step-1">
+        <div class="step-icon done-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label">STEP 1</span>
+          <span class="step-name">Vehicle Information</span>
+        </div>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-item active" id="step-2">
+        <div class="step-icon active-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <div class="step-info">
+          <span class="step-label active-label">STEP 2</span>
+          <span class="step-name active-name">Photos</span>
+        </div>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-item" id="step-3">
+        <div class="step-icon muted-icon">03</div>
+        <div class="step-info">
+          <span class="step-label">STEP 3</span>
+          <span class="step-name muted">Pricing  Availability</span>
+        </div>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-item" id="step-4">
+        <div class="step-icon muted-icon">04</div>
+        <div class="step-info">
+          <span class="step-label">STEP 4</span>
+          <span class="step-name muted">Features Rules</span>
+        </div>
+      </div>
+
+      <div class="step-connector"></div>
+
+      <div class="step-item" id="step-5">
+        <div class="step-icon muted-icon">05</div>
+        <div class="step-info">
+          <span class="step-label">STEP 5</span>
+          <span class="step-name muted">Documents Submit</span>
+        </div>
+      </div>
+
+    </aside>
+
+   
+    <main class="content">
+
+      <h1 class="page-title">ADD PHOTOS</h1>
+      <p class="page-sub">High-quality photos help your car get booked quicker .</p>
+
+      <!-- Upload grid -->
+      <div class="upload-grid" id="uploadGrid">
+
+        <div class="upload-slot" id="slot-front">
+          <p class="slot-label">EXTERIOR — FRONT (REQUIRED)</p>
+          <label class="upload-box" for="input-front" id="box-front">
+            <div class="upload-inner" id="inner-front">
+              <svg class="upload-icon" width="38" height="38" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a56db" stroke-width="1.5"/>
+                <polyline points="14 2 14 8 20 8" stroke="#1a56db" stroke-width="1.5"/>
+                <line x1="12" y1="12" x2="12" y2="18" stroke="#1a56db" stroke-width="2"/>
+                <polyline points="9 15 12 12 15 15" stroke="#1a56db" stroke-width="2"/>
+              </svg>
+              <span class="upload-cta">Upload Photo</span>
+              <span class="upload-hint">Well-lit, straight-on shot</span>
+            </div>
+            <input type="file" id="input-front" accept="image/*" onchange="previewPhoto(event, 'box-front', 'inner-front')" />
+          </label>
+        </div>
+
+        <div class="upload-slot" id="slot-rear">
+          <p class="slot-label">EXTERIOR — REAR (REQUIRED)</p>
+          <label class="upload-box" for="input-rear" id="box-rear">
+            <div class="upload-inner" id="inner-rear">
+              <svg class="upload-icon" width="38" height="38" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a56db" stroke-width="1.5"/>
+                <polyline points="14 2 14 8 20 8" stroke="#1a56db" stroke-width="1.5"/>
+                <line x1="12" y1="12" x2="12" y2="18" stroke="#1a56db" stroke-width="2"/>
+                <polyline points="9 15 12 12 15 15" stroke="#1a56db" stroke-width="2"/>
+              </svg>
+              <span class="upload-cta">Upload Photo</span>
+              <span class="upload-hint">Show boot and rear lights</span>
+            </div>
+            <input type="file" id="input-rear" accept="image/*" onchange="previewPhoto(event, 'box-rear', 'inner-rear')" />
+          </label>
+        </div>
+
+        <div class="upload-slot" id="slot-left">
+          <p class="slot-label">EXTERIOR — LEFT SIDE</p>
+          <label class="upload-box" for="input-left" id="box-left">
+            <div class="upload-inner" id="inner-left">
+              <svg class="upload-icon" width="38" height="38" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a56db" stroke-width="1.5"/>
+                <polyline points="14 2 14 8 20 8" stroke="#1a56db" stroke-width="1.5"/>
+                <line x1="12" y1="12" x2="12" y2="18" stroke="#1a56db" stroke-width="2"/>
+                <polyline points="9 15 12 12 15 15" stroke="#1a56db" stroke-width="2"/>
+              </svg>
+              <span class="upload-cta">Upload Photo</span>
+              <span class="upload-hint">Driver's side profile</span>
+            </div>
+            <input type="file" id="input-left" accept="image/*" onchange="previewPhoto(event, 'box-left', 'inner-left')" />
+          </label>
+        </div>
+
+        <div class="upload-slot" id="slot-right">
+          <p class="slot-label">EXTERIOR — RIGHT SIDE</p>
+          <label class="upload-box" for="input-right" id="box-right">
+            <div class="upload-inner" id="inner-right">
+              <svg class="upload-icon" width="38" height="38" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a56db" stroke-width="1.5"/>
+                <polyline points="14 2 14 8 20 8" stroke="#1a56db" stroke-width="1.5"/>
+                <line x1="12" y1="12" x2="12" y2="18" stroke="#1a56db" stroke-width="2"/>
+                <polyline points="9 15 12 12 15 15" stroke="#1a56db" stroke-width="2"/>
+              </svg>
+              <span class="upload-cta">Upload Photo</span>
+              <span class="upload-hint">Passenger side profile</span>
+            </div>
+            <input type="file" id="input-right" accept="image/*" onchange="previewPhoto(event, 'box-right', 'inner-right')" />
+          </label>
+        </div>
+
+        <div class="upload-slot" id="slot-interior">
+          <p class="slot-label">INTERIOR — FRONT SEATS</p>
+          <label class="upload-box" for="input-interior" id="box-interior">
+            <div class="upload-inner" id="inner-interior">
+              <svg class="upload-icon" width="38" height="38" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a56db" stroke-width="1.5"/>
+                <polyline points="14 2 14 8 20 8" stroke="#1a56db" stroke-width="1.5"/>
+                <line x1="12" y1="12" x2="12" y2="18" stroke="#1a56db" stroke-width="2"/>
+                <polyline points="9 15 12 12 15 15" stroke="#1a56db" stroke-width="2"/>
+              </svg>
+              <span class="upload-cta">Upload Photo</span>
+              <span class="upload-hint">Dashboard &amp; seats</span>
+            </div>
+            <input type="file" id="input-interior" accept="image/*" onchange="previewPhoto(event, 'box-interior', 'inner-interior')" />
+          </label>
+        </div>
+
+        <div class="upload-slot" id="slot-boot">
+          <p class="slot-label">BOOT / TRUNK</p>
+          <label class="upload-box" for="input-boot" id="box-boot">
+            <div class="upload-inner" id="inner-boot">
+              <svg class="upload-icon" width="38" height="38" viewBox="0 0 24 24" fill="none">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#1a56db" stroke-width="1.5"/>
+                <polyline points="14 2 14 8 20 8" stroke="#1a56db" stroke-width="1.5"/>
+                <line x1="12" y1="12" x2="12" y2="18" stroke="#1a56db" stroke-width="2"/>
+                <polyline points="9 15 12 12 15 15" stroke="#1a56db" stroke-width="2"/>
+              </svg>
+              <span class="upload-cta">Upload Photo</span>
+              <span class="upload-hint">Open boot space</span>
+            </div>
+            <input type="file" id="input-boot" accept="image/*" onchange="previewPhoto(event, 'box-boot', 'inner-boot')" />
+          </label>
+        </div>
+
+      </div>
+
+      <!-- Pro tip -->
+      <div class="pro-tip">
+        <div class="tip-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div>
+          <p class="tip-heading">PRO-TIP</p>
+          <p class="tip-body">Landscape orientation works best for the app's gallery view. Avoid using filters or harsh flash.</p>
+        </div>
+      </div>
+
+      
+      <div class="footer-divider"></div>
+
+      
+      <div class="form-footer">
+        <button class="btn-back" onclick="history.back()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M19 12H5M12 5l-7 7 7 7"/>
+          </svg>
+          Back
+        </button>
+		
+		<!-- Button -->
+        <button class="btn-continue" onclick="window.location.href='CarListThree.html'">
+          Save and Continue
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="CarListTwo.js"></script>
+</body>
+</html>

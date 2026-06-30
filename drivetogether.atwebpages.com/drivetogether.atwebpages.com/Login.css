@@ -1,0 +1,219 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #111111;           /* dark outer frame (browser bg) */
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+}
+
+/* main white canvas */
+.login-card {
+  background-color: #ffffff;
+  width: 1100px;
+  max-width: 100%;
+  min-height: 620px;
+  border-radius: 0;
+  display: flex;
+  padding: 72px 90px;
+  column-gap: 80px;
+}
+
+/* left column */
+.login-main {
+  flex: 1.1;
+}
+
+.welcome-title {
+  font-size: 28px;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.welcome-subtitle {
+  font-size: 14px;
+  color: #606775;
+  margin-bottom: 32px;
+}
+
+.login-form {
+  max-width: 420px;
+}
+
+.field-group {
+  margin-bottom: 22px;
+}
+
+label {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #808694;
+  font-weight: 600;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.forgot-link {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: #1b4ed8;
+  font-weight: 600;
+}
+
+/* input wrapper with icon */
+.field-wrapper {
+  margin-top: 8px;
+  border: 1px solid #dde1ea;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  height: 52px;
+  background-color: #ffffff;
+}
+
+.field-icon {
+  font-size: 16px;
+  color: #9ca3af;
+  margin-right: 10px;
+}
+
+.field-wrapper input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  color: #111827;
+}
+
+.field-wrapper input::placeholder {
+  color: #9ca3af;
+}
+
+/* buttons */
+.btn {
+  width: 100%;
+  border-radius: 4px;
+  border: none;
+  height: 52px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  transition: background-color 0.15s ease, transform 0.05s ease,
+              box-shadow 0.15s ease;
+}
+
+.primary-btn {
+  background-color: #1b4ed8;
+  color: #ffffff;
+  margin-top: 10px;
+  box-shadow: 0 8px 16px rgba(27, 78, 216, 0.35);
+}
+
+.primary-btn:hover {
+  background-color: #1740af;
+}
+
+.primary-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 4px 10px rgba(27, 78, 216, 0.45);
+}
+
+.arrow {
+  font-size: 16px;
+}
+
+/* internal text */
+.internal-text {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #b3b9c5;
+  margin: 18px 0 10px;
+}
+
+/* admin button */
+.admin-btn {
+  background-color: #f3f4f6;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+
+.admin-btn:hover {
+  background-color: #e5e7eb;
+}
+
+.admin-icon {
+  font-size: 16px;
+}
+
+/* footer */
+.footer-text {
+  margin-top: 28px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.request-link {
+  color: #1b4ed8;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 4px;
+}
+
+.request-link:hover {
+  text-decoration: underline;
+}
+
+/* right panel */
+.right-panel {
+  flex: 0.9;
+  align-self: stretch;
+  background-color: #f5f7fb;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-name {
+  font-size: 22px;
+  letter-spacing: 0.16em;
+  color: #1b4ed8;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+.brand-copy {
+  font-size: 14px;
+  color: #4b5563;
+  line-height: 1.6;
+}
+
+/* ensure desktop layout only (no responsive tweaks here) */
+@media (max-width: 992px) {
+  /* optional: just keep it centered and allow horizontal scroll */
+  .login-card {
+    min-width: 900px;
+  }
+}

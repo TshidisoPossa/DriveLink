@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DriveLink – Checkout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="Payment.css" />
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="RenterDashboard.html" class="nav-logo">DRIVELINK</a>
+    <ul class="nav-links">
+      <li><a href="RenterDashboard.html">Browse</a></li>
+      <li><a href="#">How it works</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="#" class="btn-ghost">Login</a>
+      <a href="#" class="btn-primary">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar">
+    <div class="progress-step done">
+      <span class="step-num">✓</span>
+      <span class="step-label">Details</span>
+    </div>
+    <div class="progress-line done"></div>
+    <div class="progress-step done">
+      <span class="step-num">✓</span>
+      <span class="step-label">Agreement</span>
+    </div>
+    <div class="progress-line done"></div>
+    <div class="progress-step active">
+      <span class="step-num">3</span>
+      <span class="step-label">Payment</span>
+    </div>
+    <div class="progress-line"></div>
+    <div class="progress-step">
+      <span class="step-num">4</span>
+      <span class="step-label">Confirm</span>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="page-header">
+      <h1 class="page-title">CHECKOUT</h1>
+      <p class="page-sub">Complete your rental agreement for <strong id="refDisplay">#REF-0000</strong></p>
+    </div>
+
+    <div class="checkout-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="checkout-left">
+
+        <section class="section">
+          <h2 class="section-title">PAYMENT METHOD</h2>
+
+          <div class="method-card">
+            <div class="method-header">
+              <div class="method-info">
+                <span class="method-name">Secure Online Payment</span>
+                <span class="method-desc">
+                  You'll be redirected to our payment partner's secure page to
+                  enter your card or banking details. DriveLink never stores
+                  or sees your card information.
+                </span>
+              </div>
+              <div class="method-icons">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="card-icon" />
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="card-icon" />
+              </div>
+            </div>
+          </div>
+
+          <div class="method-card">
+            <div class="method-header">
+              <div class="method-info">
+                <span class="method-name">Instant EFT</span>
+                <span class="method-desc">Real-time bank transfer, also handled on the secure payment page. No card needed.</span>
+              </div>
+              <div class="method-badge">INSTANT</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECURE BADGES -->
+        <div class="secure-strip">
+          <span class="secure-item">🔒 256-bit SSL Encryption</span>
+          <span class="secure-item">🛡 PCI DSS Compliant</span>
+          <span class="secure-item">✅ Processed by our certified payment partner</span>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN: SUMMARY -->
+      <aside class="checkout-right">
+        <div class="summary-card">
+          <h3 class="summary-title">AGREEMENT SUMMARY</h3>
+
+          <div class="summary-car">
+            <div class="car-summary-info">
+              <strong class="car-name" id="carNameDisplay">Vehicle</strong>
+              <span class="car-type">Rental Payment</span>
+              <span class="car-ref" id="refDisplay2">Reference: #REF-0000</span>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="rental-dates">
+            <div class="date-row">
+              <span class="date-label">Pick-up</span>
+              <span class="date-val" id="pickupDisplay">—</span>
+            </div>
+            <div class="date-row">
+              <span class="date-label">Return</span>
+              <span class="date-val" id="returnDisplay">—</span>
+            </div>
+            <div class="date-row">
+              <span class="date-label">Duration</span>
+              <span class="date-val" id="durationDisplay">—</span>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="price-breakdown">
+            <div class="price-row">
+              <span id="dailyRateLabel">Daily rate</span>
+              <span id="dailyRateValue">R 0</span>
+            </div>
+            <div class="price-row">
+              <span>Service fee</span>
+              <span id="serviceFeeValue">R 0</span>
+            </div>
+            <div class="price-row">
+              <span>Security deposit</span>
+              <span id="depositValue">R 0</span>
+            </div>
+          </div>
+
+          <hr class="divider" />
+
+          <div class="total-row">
+            <span class="total-label">TOTAL DUE</span>
+            <span class="total-amount" id="totalDisplay">R 0</span>
+          </div>
+
+          <button class="btn-pay" id="pay-btn" type="button" onclick="submitToPayFast()">
+            <span class="lock-icon">🔒</span>
+            <span id="pay-btn-text">Confirm and Pay</span>
+            <span class="btn-spinner hidden" id="pay-spinner">⟳</span>
+          </button>
+
+          <p class="terms-note">
+            By clicking 'Confirm and Pay', you agree to our
+            <a href="#">Terms of Service</a> and <a href="#">Refund Policy</a>.
+            You will be redirected to our payment partner to complete this
+            transaction securely.
+          </p>
+        </div>
+
+        <!-- NEED HELP -->
+        <div class="help-card">
+          <span class="help-icon">💬</span>
+          <div>
+            <strong>Need help?</strong>
+            <p>Call us: <a href="tel:+27123456789">+27 12 345 6789</a></p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- HIDDEN FORM — submitted by JS, redirects to the payment partner's sandbox -->
+  <form id="payfast-form" method="POST" action="https://sandbox.payfast.co.za/eng/process" style="display:none;">
+    <input type="hidden" name="merchant_id" value="10000100" />
+    <input type="hidden" name="merchant_key" value="46f0cd694581a" />
+    <input type="hidden" name="return_url" value="http://drivetogether.atwebpages.com/RenterDashboard.html" />
+    <input type="hidden" name="cancel_url" value="http://drivetogether.atwebpages.com/payment.html" />
+    <input type="hidden" name="notify_url" value="http://drivetogether.atwebpages.com/process_payment.php" />
+    <input type="hidden" name="amount" id="pf-amount" value="0.00" />
+    <input type="hidden" name="item_name" id="pf-item-name" value="DriveLink Rental" />
+    <input type="hidden" name="item_description" id="pf-item-desc" value="Vehicle Rental" />
+    <input type="hidden" name="custom_str1" id="pf-custom-ref" value="" />
+  </form>
+
+  <script src="Payment.js"></script>
+</body>
+</html>
