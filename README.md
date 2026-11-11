@@ -1,2 +1,2 @@
 # DriveLink
-Web-application 
+Drive Link is a car-sharing platform that connects vehicle owners with people who need reliable, affordable transport. Owners can list their cars and earn income from vehicles that would otherwise sit idle, while renters can book the right car for their needs without the high cost of ownership. Built for today’s economy, Drive Link turns unused vehicles into opportunities, creates flexible income, and makes mobility more accessible for individuals, families, and businesses.
